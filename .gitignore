@@ -1,0 +1,7 @@
+# OS
+.DS_Store
+
+# Eclipse
+.project
+.settings/
+target/
