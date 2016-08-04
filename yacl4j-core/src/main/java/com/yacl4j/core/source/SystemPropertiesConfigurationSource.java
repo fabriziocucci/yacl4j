@@ -11,7 +11,7 @@ import com.yacl4j.core.ConfigurationSource;
 import com.yacl4j.core.util.JacksonUtils;
 import com.yacl4j.core.util.JsonPointerUtils;
 
-public class SystemPropertiesConfigurationSource implements ConfigurationSource {
+class SystemPropertiesConfigurationSource implements ConfigurationSource {
 	
 	@Override
 	public JsonNode getConfiguration() {

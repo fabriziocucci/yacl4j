@@ -1,7 +1,9 @@
 package com.yacl4j.core;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,9 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import org.junit.Test;
-
-import com.yacl4j.core.source.SystemPropertiesConfigurationSource;
-import com.yacl4j.core.source.YamlFileConfigurationSource;
 
 public class ConfigurationBuilderTest {
 
@@ -36,8 +35,8 @@ public class ConfigurationBuilderTest {
 				, "nestedApplicationConfiguration:"
 				, "  nestedField: Hi, I'm a NESTED field!");
 		
-		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-				.source(new YamlFileConfigurationSource(createConfigurationFile(configuration)));
+		ConfigurationBuilder configurationBuilder = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile(configuration));
 		
 		ConfigurationForSourceTest applicationConfiguration = configurationBuilder.build(ConfigurationForSourceTest.class);
 		
@@ -58,9 +57,9 @@ public class ConfigurationBuilderTest {
 				, "nestedApplicationConfiguration:"
 				, "  nestedField: Hi, I'm a NESTED field!");
 		
-		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-				.source(new YamlFileConfigurationSource(createConfigurationFile(configuration)))
-				.source(new SystemPropertiesConfigurationSource());
+		ConfigurationBuilder configurationBuilder = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile(configuration))
+				.source().systemProperties();
 		
 		System.setProperty("field", "Hi, I'm a field...OVERRIDDEN!");
 		System.setProperty("integer", "22");
@@ -89,8 +88,8 @@ public class ConfigurationBuilderTest {
 				, "greeting: Hello ${name}"
 				, "name: World");
 		
-		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-				.source(new YamlFileConfigurationSource(createConfigurationFile(configuration)));
+		ConfigurationBuilder configurationBuilder = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile(configuration));
 		
 		ConfigurationForPlaceholderTest applicationConfiguration = configurationBuilder.build(ConfigurationForPlaceholderTest.class);
 		
@@ -106,9 +105,9 @@ public class ConfigurationBuilderTest {
 				, "greeting: Hello ${name}"
 				, "name: World");
 		
-		ConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-				.source(new YamlFileConfigurationSource(createConfigurationFile(configuration)))
-				.source(new SystemPropertiesConfigurationSource());
+		ConfigurationBuilder configurationBuilder = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile(configuration))
+				.source().systemProperties();
 		
 		System.setProperty("name", "Config");
 		ConfigurationForPlaceholderTest applicationConfiguration = configurationBuilder.build(ConfigurationForPlaceholderTest.class);
