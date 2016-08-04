@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.yacl4j.core.ConfigurationSource;
 import com.yacl4j.core.util.JacksonUtils;
 
-public class FileBasedYamlConfigurationSource implements ConfigurationSource {
+public class YamlFileConfigurationSource implements ConfigurationSource {
 	
 	private final File configurationFile;
 	
-	public FileBasedYamlConfigurationSource(File configurationFile) {
+	public YamlFileConfigurationSource(File configurationFile) {
 		this.configurationFile = configurationFile;
 	}
 
