@@ -41,6 +41,10 @@ public class ConfigurationSourceBuilder {
 		return this.configurationBuilder.source(new SystemPropertiesConfigurationSource());
 	}
 	
+	public ConfigurationBuilder environmentVariables() {
+		return this.configurationBuilder.source(new EnvironmentVariablesConfigurationSource());
+	}
+	
 	private ConfigurationSource selectFileConfigurationSource(File file) {
 		if (file.getName().endsWith(".yaml")) {
 			return new YamlFileConfigurationSource(file);
