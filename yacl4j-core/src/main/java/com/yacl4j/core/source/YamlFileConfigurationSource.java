@@ -10,7 +10,7 @@ class YamlFileConfigurationSource implements ConfigurationSource {
 	
 	private final File configurationFile;
 	
-	public YamlFileConfigurationSource(File configurationFile) {
+	YamlFileConfigurationSource(File configurationFile) {
 		this.configurationFile = configurationFile;
 	}
 
