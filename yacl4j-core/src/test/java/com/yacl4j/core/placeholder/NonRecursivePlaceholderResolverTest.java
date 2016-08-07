@@ -12,7 +12,7 @@ import com.yacl4j.core.util.JacksonUtils;
 
 public class NonRecursivePlaceholderResolverTest {
 	
-	private final NonRecursivePlaceholderResolver localPlaceholderResolver = new NonRecursivePlaceholderResolver();
+	private final NonRecursivePlaceholderResolver nonRecursivePlaceholderResolver = new NonRecursivePlaceholderResolver();
 	
 	@Test
 	public void testThatNothingHappensWhenTheConfigurationIsEmpty() {
@@ -21,7 +21,7 @@ public class NonRecursivePlaceholderResolverTest {
 		// ('readTree' with an empty file results in a 'JsonMappingException: No content to map due to end-of-input')
 		JsonNode applicationConfiguration = MissingNode.getInstance();
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		assertThat(applicationConfiguration.size(), is(equalTo(0)));
 	}
@@ -39,7 +39,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		String actualValue = applicationConfiguration.get(1).asText();
 		String expectedValue = applicationConfiguration.get(0).asText();;
@@ -56,7 +56,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		assertThat(applicationConfiguration.get("array").get(0).asText(), is(equalTo(applicationConfiguration.get("element0").asText())));
 	}
@@ -71,7 +71,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		String actualValue = applicationConfiguration.get("array").get(0).asText();
 		String expectedValue = String.join(",", applicationConfiguration.get("element0").asText(), applicationConfiguration.get("element0").asText());
@@ -89,7 +89,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		String actualValue = applicationConfiguration.get("array").get(0).asText();
 		String expectedValue = String.join(",", applicationConfiguration.get("element0").asText(), applicationConfiguration.get("element1").asText());
@@ -107,7 +107,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		JsonNode actualValue = applicationConfiguration.get("array1").get(0);
 		JsonNode expectedValue = applicationConfiguration.get("array0");
@@ -125,7 +125,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		JsonNode actualValue = applicationConfiguration.get("array").get(0);
 		JsonNode expectedValue = applicationConfiguration.get("object");
@@ -144,7 +144,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		JsonNode actualValue = applicationConfiguration.get("array1").get(0);
 		JsonNode expectedValue = TextNode.valueOf(String.join(",", applicationConfiguration.get("property").asText(), "${array0}"));
@@ -163,7 +163,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		JsonNode actualValue = applicationConfiguration.get("array").get(0);
 		JsonNode expectedValue = TextNode.valueOf(String.join(",", applicationConfiguration.get("property").asText(), "${object}"));
@@ -183,7 +183,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		String actualValue = applicationConfiguration.get("element1").asText();
 		String expectedValue = applicationConfiguration.get("element0").asText();
@@ -200,7 +200,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		String actualValue = applicationConfiguration.get("element1").asText();
 		String expectedValue = applicationConfiguration.get("array").get(0).asText();
@@ -217,7 +217,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		JsonNode actualValue = applicationConfiguration.get("element1");
 		JsonNode expectedValue = applicationConfiguration.get("array");
@@ -234,7 +234,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		JsonNode actualValue = applicationConfiguration.get("element1");
 		JsonNode expectedValue = applicationConfiguration.get("object");
@@ -253,7 +253,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		JsonNode actualValue = applicationConfiguration.get("object").get("property");
 		JsonNode expectedValue = TextNode.valueOf(String.join(",", applicationConfiguration.get("property").asText(), "${array}"));
@@ -272,7 +272,7 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
 		
-		localPlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
 		JsonNode actualValue = applicationConfiguration.get("object1").get("property");
 		JsonNode expectedValue = TextNode.valueOf(String.join(",", applicationConfiguration.get("property").asText(), "${object0}"));
