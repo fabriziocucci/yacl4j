@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.fabriziocucci/yacl4j.svg)](http://search.maven.org/#search|ga|1|com.github.fabriziocucci.yacl4j)
+
 # yacl4j
 **yacl4j** is a configuration library for Java highly inspired by [cfg4j](https://github.com/cfg4j/cfg4j) and [Spring Boot](https://github.com/spring-projects/spring-boot).
 
