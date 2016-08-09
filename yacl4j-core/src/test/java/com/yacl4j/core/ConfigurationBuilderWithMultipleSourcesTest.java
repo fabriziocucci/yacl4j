@@ -10,12 +10,15 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
 import mockit.Mock;
 import mockit.MockUp;
+import mockit.integration.junit4.JMockit;
 
+@RunWith(JMockit.class)
 public class ConfigurationBuilderWithMultipleSourcesTest {
 
 	@Test
