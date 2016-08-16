@@ -77,7 +77,7 @@ In the previous example:
 - if one property is defined in multiple sources, the source with higher priority win.
 
 ## Properties support? Yes, but...
-yacl4j supports hierarchical configurations by design. Properties are not really hierarchical, so yacl4j leverages common conventions to transform properties-based configuration into hierarchical ones.
+yacl4j supports hierarchical configurations by design. Properties are not really hierarchical, so yacl4j leverages the [Json Pointer RFC](https://tools.ietf.org/html/rfc6901) to transform properties-based configurations into hierarchical ones.
 
 Let's consider an example:
 
@@ -89,7 +89,7 @@ java.vm.vendor=Oracle Corporation
 java.vm.version=25.77-b03
 ```
 
-The above configuration is transformed as follows:
+The above configuration becomes:
 
 ```yaml
 java.runtime.name: Java(TM) SE Runtime Environment
@@ -109,9 +109,9 @@ java/vm/vendor=Oracle Corporation
 java/vm/version=25.77-b03
 ```
 
-Hey, did you just replace all '.' with '/' ? Yes, indeed! This is because yacl4j is currently based on the [Json Pointer RFC](https://tools.ietf.org/html/rfc6901) with one simple exception: the leading '/' is optional.
+Hey, did we just replace all '.' with '/' ? Yes, indeed! This is because yacl4j is currently based on the [Json Pointer RFC](https://tools.ietf.org/html/rfc6901) with one simple exception: the leading '/' is optional.
 
-The above configuration is transformed as follows: 
+The above configuration becomes: 
 
 ```yaml
 java:
