@@ -45,7 +45,7 @@ public class SystemPropertiesConfigurationSourceTest {
 	@Test
 	public void testNestedSystemProperty() {
 		
-		String propertyKey = "nested.property";
+		String propertyKey = "/nested/property";
 		String propertyValue = "value";
 		System.setProperty(propertyKey, propertyValue);
 		
@@ -58,11 +58,11 @@ public class SystemPropertiesConfigurationSourceTest {
 	@Test
 	public void testNestedSystemPropertiesWithCommonHead() {
 		
-		String property1Key = "nested.property1";
+		String property1Key = "/nested/property1";
 		String property1Value = "value1";
 		System.setProperty(property1Key, property1Value);
 		
-		String property2Key = "nested.property2";
+		String property2Key = "/nested/property2";
 		String property2Value = "value2";
 		System.setProperty(property2Key, property2Value);
 		
