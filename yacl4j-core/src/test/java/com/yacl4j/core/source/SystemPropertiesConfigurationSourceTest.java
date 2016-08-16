@@ -10,8 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ValueNode;
-import com.yacl4j.core.source.SystemPropertiesConfigurationSource;
 import com.yacl4j.core.util.JacksonUtils;
 import com.yacl4j.core.util.JsonPointerUtils;
 
@@ -101,37 +99,6 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		JsonNode actualPropertyValue = configuration.at(JsonPointerUtils.fromProperty(propertyKey).get());
 		assertThat(actualPropertyValue, is(equalTo(propertyValue)));
-	}
-	
-	/**
-	 * This is a nasty case where a set of properties cannot be mapped to a Jackson {@link JsonNode}, e.g.
-	 * 
-	 * java.vendor=Oracle Corporation
-	 * java.vendor.url.bug=http://bugreport.sun.com/bugreport/
-	 * 
-	 * In the corresponding tree, 'java.vendor' should be both a {@link ValueNode} and an {@link ObjectNode}
-	 * which, of course, is not possible. Since those unfortunate cases can be easily avoided in brand new
-	 * configurations and they are quite rare in existing one (e.g. system properties), we accept the limitation 
-	 * and handle the situation by just dropping any ambiguous node discovered during the construction of the tree.
-	 */
-	@Test
-	public void testThatInvalidSystemPropertiesAreDiscarded() {
-		
-		String invalidPropertyKey = "nested";
-		String invalidPropertyValue = "value";
-		System.setProperty(invalidPropertyKey, invalidPropertyValue);
-		
-		String validPropertyKey = "nested.property";
-		String validPropertyValue = "value";
-		System.setProperty(validPropertyKey, validPropertyValue);
-		
-		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
-
-		JsonNode actualInvalidPropertyValue = configuration.at(JsonPointerUtils.fromProperty(invalidPropertyKey).get());
-		assertThat(actualInvalidPropertyValue.isValueNode(), is(equalTo(false)));
-		
-		String actualValidPropertyValue = configuration.at(JsonPointerUtils.fromProperty(validPropertyKey).get()).asText();
-		assertThat(actualValidPropertyValue, is(equalTo(validPropertyValue)));
 	}
 	
 }

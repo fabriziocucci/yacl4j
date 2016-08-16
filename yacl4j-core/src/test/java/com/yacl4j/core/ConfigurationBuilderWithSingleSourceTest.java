@@ -70,7 +70,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		
 		String configurationAsString = String.join(System.getProperty("line.separator")
 				, "property=value"
-				, "nested.property=nested.value");
+				, "nested/property=nested.value");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().file(createConfigurationFile(configurationAsString, ".properties"))
@@ -121,7 +121,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		
 		String configurationAsString = String.join(System.getProperty("line.separator")
 				, "property=value"
-				, "nested.property=nested.value");
+				, "nested/property=nested.value");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().fileFromPath(createConfigurationFile(configurationAsString, ".properties").getAbsolutePath())
@@ -186,7 +186,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	        Properties getProperties() {
 	        	Properties properties = new Properties();
 	        	properties.setProperty("property", "value");
-	        	properties.setProperty("nested.property", "nested.value");
+	        	properties.setProperty("nested/property", "nested.value");
 	            return properties;
 	        }
 	    };

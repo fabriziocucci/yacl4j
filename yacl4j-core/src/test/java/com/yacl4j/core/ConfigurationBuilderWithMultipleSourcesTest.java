@@ -38,7 +38,7 @@ public class ConfigurationBuilderWithMultipleSourcesTest {
 	        Properties getProperties() {
 	        	Properties properties = new Properties();
 	        	properties.setProperty("property", "system.property.value");
-	        	properties.setProperty("nested.property", "system.property.nested.value");
+	        	properties.setProperty("nested/property", "system.property.nested.value");
 	            return properties;
 	        }
 	    };
@@ -70,7 +70,7 @@ public class ConfigurationBuilderWithMultipleSourcesTest {
 	        Properties getProperties() {
 	        	Properties properties = new Properties();
 	        	properties.setProperty("property2", "value2");
-	        	properties.setProperty("nested.property2", "nested.value2");
+	        	properties.setProperty("nested/property2", "nested.value2");
 	            return properties;
 	        }
 	    };

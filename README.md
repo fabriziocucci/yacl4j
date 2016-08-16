@@ -67,7 +67,7 @@ MyConfiguration myConfiguration = ConfigurationBuilder.newBuilder() // #0
     .source().systemProperties()                                    // #4
     .source().environmentVariables()                                // #5
     .source(new MyCustomConfigurationSource());                     // #6
-    .build(MyConfiguration.class)                                   // #7
+    .build(MyConfiguration.class);                                  // #7
 ```
 
 In the previous example:
@@ -84,12 +84,34 @@ Let's consider an example:
 ```properties
 java.runtime.name=Java(TM) SE Runtime Environment
 java.runtime.version=1.8.0_77-b03
-java.vm.version=25.77-b03
-java.vm.vendor=Oracle Corporation
 java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+java.vm.vendor=Oracle Corporation
+java.vm.version=25.77-b03
 ```
 
 The above configuration is transformed as follows:
+
+```yaml
+java.runtime.name: Java(TM) SE Runtime Environment
+java.runtime.version: 1.8.0_77-b03
+java.vm.name: Java HotSpot(TM) 64-Bit Server VM
+java.vm.vendor: Oracle Corporation
+java.vm.version: 25.77-b03
+```
+
+Mmmmm...that doesn't look really "hierarchical" to me! Let's change a little bit the properties:
+
+```properties
+java/runtime/name=Java(TM) SE Runtime Environment
+java/runtime/version=1.8.0_77-b03
+java/vm/name=Java HotSpot(TM) 64-Bit Server VM
+java/vm/vendor=Oracle Corporation
+java/vm/version=25.77-b03
+```
+
+Hey, did you just replace all '.' with '/' ? Yes, indeed! This is because yacl4j is currently based on the [Json Pointer RFC](https://tools.ietf.org/html/rfc6901) with one simple exception: the leading '/' is optional.
+
+The above configuration is transformed as follows: 
 
 ```yaml
 java:
@@ -97,23 +119,12 @@ java:
     name: Java(TM) SE Runtime Environment
     version: 1.8.0_77-b03
   vm:
-    version: 25.77-b03
-    vendor: Oracle Corporation
     name: Java HotSpot(TM) 64-Bit Server VM
+    vendor: Oracle Corporation
+    version: 25.77-b03
 ```
 
-So why bother? Everything looks good so far. Yes, but...life is complicated! Consider the following example:
-
-```properties
-java.vendor=Oracle Corporation
-java.vendor.url.bug=http://bugreport.sun.com/bugreport/
-```
-
-This is a nasty case where a set of properties cannot be mapped to a [JsonNode](https://fasterxml.github.io/jackson-databind/javadoc/2.8/com/fasterxml/jackson/databind/JsonNode.html). In the corresponding tree, 'java.vendor' should be both a [ValueNode](https://fasterxml.github.io/jackson-databind/javadoc/2.8/com/fasterxml/jackson/databind/node/ValueNode.html) and an [ObjectNode](https://fasterxml.github.io/jackson-databind/javadoc/2.8/com/fasterxml/jackson/databind/node/ObjectNode.html) which, of course, is not possible.
-
-
-Since those unfortunate cases can be easily avoided in brand new properties-based configurations and they are quite rare in existing one (e.g. system properties), we accept the limitation and handle the situation by just dropping any ambiguous node discovered during the construction of the tree.
-
+Better, right? So, it's really easy to transform flat [Properties](https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html) into hierarchical configurations.
 
 My suggestion? Just use YAML-based configurations if you can!
 
