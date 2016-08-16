@@ -42,6 +42,13 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	}
 	
 	@Test(expected=IllegalStateException.class)
+	public void testConfigurationBuilderWhenJsonFileDoesNotExist() {
+		ConfigurationBuilder.newBuilder()
+				.source().file(new File("i-dont-exist.json"))
+				.build(JsonNode.class);
+	}
+	
+	@Test(expected=IllegalStateException.class)
 	public void testConfigurationBuilderWhenPropertiesFileDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().file(new File("i-dont-exist.properties"))
@@ -58,6 +65,26 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.at("/property").asText(), is(equalTo("value")));
+		assertThat(configuration.at("/nested/property").asText(), is(equalTo("nested.value")));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWithJsonFile() throws IOException {
+		
+		String configurationAsString = String.join(System.getProperty("line.separator")
+				, "{"
+				, "  \"property\": \"value\","
+				, "  \"nested\": {"
+				, "    \"property\": \"nested.value\""
+				, "  }"
+				, "}");
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile(configurationAsString, ".json"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -93,6 +120,13 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	}
 	
 	@Test(expected=IllegalStateException.class)
+	public void testConfigurationBuilderWhenJsonFileFromPathDoesNotExist() {
+		ConfigurationBuilder.newBuilder()
+				.source().fileFromPath("i-dont-exist.json")
+				.build(JsonNode.class);
+	}
+	
+	@Test(expected=IllegalStateException.class)
 	public void testConfigurationBuilderWhenPropertiesFileFromPathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().fileFromPath("i-dont-exist.properties")
@@ -106,6 +140,26 @@ public class ConfigurationBuilderWithSingleSourceTest {
 				, "property: value"
 				, "nested:"
 				, "  property: nested.value");
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().fileFromPath(createConfigurationFile(configurationAsString, ".yaml").getAbsolutePath())
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.at("/property").asText(), is(equalTo("value")));
+		assertThat(configuration.at("/nested/property").asText(), is(equalTo("nested.value")));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWithJsonFileFromPath() throws IOException {
+		
+		String configurationAsString = String.join(System.getProperty("line.separator")
+				, "{"
+				, "  \"property\": \"value\","
+				, "  \"nested\": {"
+				, "    \"property\": \"nested.value\""
+				, "  }"
+				, "}");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().fileFromPath(createConfigurationFile(configurationAsString, ".yaml").getAbsolutePath())
@@ -144,6 +198,13 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	}
 	
 	@Test(expected=IllegalStateException.class)
+	public void testConfigurationBuilderWhenJsonFileFromClasspathDoesNotExist() {
+		ConfigurationBuilder.newBuilder()
+				.source().fileFromClasspath("i-dont-exist.json")
+				.build(JsonNode.class);
+	}
+	
+	@Test(expected=IllegalStateException.class)
 	public void testConfigurationBuilderWhenPropertiesFileFromClasspathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().fileFromClasspath("i-dont-exist.properties")
@@ -155,6 +216,18 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().fileFromClasspath("application.yaml")
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.at("/property").asText(), is(equalTo("value")));
+		assertThat(configuration.at("/nested/property").asText(), is(equalTo("nested.value")));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWithJsonFileFromClasspath() {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().fileFromClasspath("application.json")
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
