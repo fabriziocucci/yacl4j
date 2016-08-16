@@ -1,0 +1,6 @@
+{
+	"property": "value",
+	"nested": {
+		"property": "nested.value"
+	}
+}

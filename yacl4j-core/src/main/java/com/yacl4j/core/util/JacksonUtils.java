@@ -20,13 +20,23 @@ public class JacksonUtils {
 	
 	private JacksonUtils() { }
 	
-	private static final SilentObjectMapper YAML_OBJECT_MAPPER = new SilentObjectMapper(new YAMLFactory())
-			.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-			.registerModule(new MrBeanModule())
-			.registerModule(new Jdk8Module());
+	private static final SilentObjectMapper YAML_OBJECT_MAPPER = objectMapper(new YAMLFactory());
+	
+	private static final SilentObjectMapper JSON_OBJECT_MAPPER = objectMapper(null);
+	
+	private static SilentObjectMapper objectMapper(JsonFactory jsonFactory) {
+		return new SilentObjectMapper(jsonFactory)
+				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+				.registerModule(new MrBeanModule())
+				.registerModule(new Jdk8Module());
+	}
 	
 	public static SilentObjectMapper yamlObjectMapper() {
 		return YAML_OBJECT_MAPPER;
+	}
+	
+	public static SilentObjectMapper jsonObjectMapper() {
+		return JSON_OBJECT_MAPPER;
 	}
 	
 	public static JsonNode merge(JsonNode mainNode, JsonNode updateNode) {

@@ -46,10 +46,12 @@ public class ConfigurationSourceBuilder {
 	}
 	
 	private ConfigurationSource selectFileConfigurationSource(File file) {
-		if (file.getName().endsWith(".yaml")) {
-			return new YamlFileConfigurationSource(file);
-		} else if (file.getName().endsWith(".properties")) {
+		if (file.getName().endsWith(".properties")) {
 			return new PropertiesFileConfigurationSource(file);
+		} else if (file.getName().endsWith(".yaml")) {
+			return new YamlFileConfigurationSource(file);
+		} else if (file.getName().endsWith(".json")) {
+			return new JsonFileConfigurationSource(file);
 		} else {
 			throw new IllegalStateException("Configuration format not supported: " + file);
 		}
