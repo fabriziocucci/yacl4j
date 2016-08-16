@@ -22,7 +22,7 @@ public class EnvironmentVariablesConfigurationSourceTest {
 	private final EnvironmentVariablesConfigurationSource environmentVariablesConfigurationSource = new EnvironmentVariablesConfigurationSource();
 	
 	@Test
-	public void testThat() throws Exception {
+	public void testSimpleEnvironmentVariable() {
 
 		String environmentVariableKey = "key";
 		String environmentVariableValue = "value";
