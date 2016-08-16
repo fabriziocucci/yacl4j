@@ -12,8 +12,11 @@ public class JsonPointerUtils {
 	
 	public static Optional<JsonPointer> fromProperty(String property) {
 		try {
-			String jsonPointerAsString = "/" + property.replaceAll("\\.", "/");
-			return Optional.of(JsonPointer.compile(jsonPointerAsString));
+			if (property.startsWith("/")) {
+				return Optional.of(JsonPointer.compile(property));
+			} else {
+				return Optional.of(JsonPointer.compile("/" + property));
+			}
 		} catch(IllegalArgumentException illegalArgumentException) {
 			return Optional.empty();
 		}
