@@ -1,7 +1,6 @@
 package com.yacl4j.core.source;
 
 import java.util.Enumeration;
-import java.util.Optional;
 import java.util.Properties;
 
 import com.fasterxml.jackson.core.JsonPointer;
@@ -20,10 +19,8 @@ abstract class AbstractPropertiesConfigurationSource implements ConfigurationSou
 		Enumeration<?> propertyNames = properties.propertyNames();
 		while (propertyNames.hasMoreElements()) {
 			String propertyKey = (String) propertyNames.nextElement();
-			Optional<JsonPointer> propertyKeyAsJsonPointer = JsonPointerUtils.fromProperty(propertyKey);
-			if (propertyKeyAsJsonPointer.isPresent()) {
-				addJsonPointer(configuration, propertyKeyAsJsonPointer.get(), properties.getProperty(propertyKey));
-			}
+			JsonPointer propertyKeyAsJsonPointer = JsonPointerUtils.fromProperty(propertyKey);
+			addJsonPointer(configuration, propertyKeyAsJsonPointer, properties.getProperty(propertyKey));
 		}
 		return configuration;
 	}

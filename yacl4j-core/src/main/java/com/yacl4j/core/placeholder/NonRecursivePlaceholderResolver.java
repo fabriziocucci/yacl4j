@@ -108,10 +108,8 @@ public class NonRecursivePlaceholderResolver implements PlaceholderResolver {
 			if (matcher.groupCount() == 2) {
 				String placeholder = matcher.group(1);
 				String property = matcher.group(2);
-				Optional<JsonPointer> jsonPointer = JsonPointerUtils.fromProperty(property);
-				if (jsonPointer.isPresent()) {
-					return Optional.of(new JsonPointerPlaceholder(placeholder, jsonPointer.get()));
-				}
+				JsonPointer jsonPointer = JsonPointerUtils.fromProperty(property);
+				return Optional.of(new JsonPointerPlaceholder(placeholder, jsonPointer));
 			}
 			return Optional.empty();
 		}

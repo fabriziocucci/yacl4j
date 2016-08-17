@@ -38,7 +38,7 @@ public class EnvironmentVariablesConfigurationSourceTest {
 	    
 	    JsonNode configuration = environmentVariablesConfigurationSource.getConfiguration();
 	    
-	    String actualEnvironmentVariableValue = configuration.at(JsonPointerUtils.fromProperty(environmentVariableKey).get()).asText();
+	    String actualEnvironmentVariableValue = configuration.at(JsonPointerUtils.fromProperty(environmentVariableKey)).asText();
 		assertThat(actualEnvironmentVariableValue, is(equalTo(environmentVariableValue)));
 	}
 

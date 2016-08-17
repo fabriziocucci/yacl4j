@@ -51,7 +51,7 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
 		
-		String actualPropertyValue = configuration.at(JsonPointerUtils.fromProperty(propertyKey).get()).asText();
+		String actualPropertyValue = configuration.at(JsonPointerUtils.fromProperty(propertyKey)).asText();
 		assertThat(actualPropertyValue, is(equalTo(propertyValue)));
 	}
 	
@@ -68,10 +68,10 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
 		
-		String actualProperty1Value = configuration.at(JsonPointerUtils.fromProperty(property1Key).get()).asText();
+		String actualProperty1Value = configuration.at(JsonPointerUtils.fromProperty(property1Key)).asText();
 		assertThat(actualProperty1Value, is(equalTo(property1Value)));
 		
-		String actualProperty2Value = configuration.at(JsonPointerUtils.fromProperty(property2Key).get()).asText();
+		String actualProperty2Value = configuration.at(JsonPointerUtils.fromProperty(property2Key)).asText();
 		assertThat(actualProperty2Value, is(equalTo(property2Value)));
 	}
 	
@@ -84,7 +84,7 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
 		
-		JsonNode actualPropertyValue = configuration.at(JsonPointerUtils.fromProperty(propertyKey).get());
+		JsonNode actualPropertyValue = configuration.at(JsonPointerUtils.fromProperty(propertyKey));
 		assertThat(actualPropertyValue, is(equalTo(propertyValue)));
 	}
 	
@@ -97,7 +97,7 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
 		
-		JsonNode actualPropertyValue = configuration.at(JsonPointerUtils.fromProperty(propertyKey).get());
+		JsonNode actualPropertyValue = configuration.at(JsonPointerUtils.fromProperty(propertyKey));
 		assertThat(actualPropertyValue, is(equalTo(propertyValue)));
 	}
 	
