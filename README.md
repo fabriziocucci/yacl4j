@@ -77,6 +77,105 @@ In the previous example:
 - at line 7, we are building the configuration bean based on the MyConfiguration interface;
 - if one property is defined in multiple sources, the source with higher priority win.
 
+## Placeholders support? ${Yes}
+yacl4j supports placeholders resolution with the syntax ${relaxed-json-pointer}.
+
+#### Simple property placeholder
+
+Let's consider an example:
+
+```yaml
+greeting: Hello ${name}
+name: yacl4j
+```
+
+The above configuration becomes:
+
+```yaml
+greeting: Hello yacl4j
+name: yacl4j
+```
+
+#### Object property placeholder
+
+Let's consider an example:
+
+```yaml
+greeting: Hello ${person/name}
+person:
+  name: yacl4j
+```
+
+The above configuration becomes:
+
+```yaml
+greeting: Hello yacl4j
+person:
+  name: yacl4j
+```
+
+#### Array element placeholder
+
+Let's consider an example:
+
+```yaml
+greeting: Hello ${persons/0}
+persons:
+  - yacl4j
+```
+
+The above configuration becomes:
+
+```yaml
+greeting: Hello yacl4j
+persons:
+  - yacl4j
+```
+
+#### Object placeholder
+
+Let's consider an example:
+
+```yaml
+object: 
+  property: value
+myObject: ${object}
+```
+
+The above configuration becomes:
+
+```yaml
+object: 
+  property: value
+myObject:
+  object: 
+    property: value
+```
+
+#### Array placeholder
+
+Let's consider an example:
+
+```yaml
+array: 
+  - value
+myArray: ${array} 
+```
+
+The above configuration becomes:
+
+```yaml
+array:
+  - value
+myArray:
+  array:
+    - value
+```
+
+#### Other placeholders
+
+For a list of all supported placeholders check the [PlaceholderResolver test](https://github.com/fabriziocucci/yacl4j/blob/master/yacl4j-core/src/test/java/com/yacl4j/core/placeholder/NonRecursivePlaceholderResolverTest.java).
+
 ## Properties support? Yes, but...
 yacl4j supports hierarchical configurations by design. Properties are not really hierarchical, so yacl4j leverages the [Json Pointer RFC](https://tools.ietf.org/html/rfc6901) to transform properties-based configurations into hierarchical ones.
 
