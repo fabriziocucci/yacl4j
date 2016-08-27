@@ -1,7 +1,6 @@
 package com.yacl4j.core.util;
 
 import java.io.File;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -130,11 +129,13 @@ public class ConfigurationUtils {
 			return fromProperties(PropertiesUtils.fromString(configuration));
 		}
 		
+		public static JsonNode fromMap(Map<String, String> map) {
+			return fromProperties(PropertiesUtils.fromMap(map));
+		}
+		
 		public static JsonNode fromProperties(java.util.Properties properties) {
 			ObjectNode configuration = ConfigurationUtils.emptyConfiguration();
-			Enumeration<?> propertyNames = properties.propertyNames();
-			while (propertyNames.hasMoreElements()) {
-				String propertyKey = (String) propertyNames.nextElement();
+			for (String propertyKey : properties.stringPropertyNames()) {
 				JsonPointer propertyKeyAsJsonPointer = JsonPointerUtils.fromProperty(propertyKey);
 				addNode(configuration, propertyKeyAsJsonPointer, properties.getProperty(propertyKey));
 			}
