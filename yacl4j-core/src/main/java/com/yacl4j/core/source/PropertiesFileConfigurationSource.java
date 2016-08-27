@@ -4,7 +4,7 @@ import java.io.File;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.yacl4j.core.ConfigurationSource;
-import com.yacl4j.core.util.PropertiesConfigurationUtils;
+import com.yacl4j.core.util.ConfigurationUtils;
 
 class PropertiesFileConfigurationSource implements ConfigurationSource {
 
@@ -16,7 +16,7 @@ class PropertiesFileConfigurationSource implements ConfigurationSource {
 
 	@Override
 	public JsonNode getConfiguration() {
-		return PropertiesConfigurationUtils.fromFile(configurationFile);
+		return ConfigurationUtils.Properties.fromFile(configurationFile);
 	}
 	
 }

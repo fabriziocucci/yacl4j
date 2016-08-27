@@ -15,8 +15,8 @@ public class ConfigurationUtilsTest {
 	@Test
 	public void testMergeWhenNonOverlappingTreesAreMerged() throws JsonProcessingException, IOException {
 		
-		JsonNode mainNode = YamlConfigurationUtils.fromString("hello: yaml");
-		JsonNode updateNode = YamlConfigurationUtils.fromString("goodbye: json");
+		JsonNode mainNode = ConfigurationUtils.Yaml.fromString("hello: yaml");
+		JsonNode updateNode = ConfigurationUtils.Yaml.fromString("goodbye: json");
 		
 		JsonNode merge = ConfigurationUtils.merge(mainNode, updateNode);
 		assertThat(merge.get("hello"), is(equalTo(mainNode.get("hello"))));
@@ -26,8 +26,8 @@ public class ConfigurationUtilsTest {
 	@Test
 	public void testMergeWhenOverlappingTreesAreMerged() throws JsonProcessingException, IOException {
 		
-		JsonNode mainNode = YamlConfigurationUtils.fromString("hello: yaml");
-		JsonNode updateNode = YamlConfigurationUtils.fromString("hello: json");
+		JsonNode mainNode = ConfigurationUtils.Yaml.fromString("hello: yaml");
+		JsonNode updateNode = ConfigurationUtils.Yaml.fromString("hello: json");
 		
 		JsonNode merge = ConfigurationUtils.merge(mainNode, updateNode);
 		assertThat(merge.get("hello"), is(equalTo(updateNode.get("hello"))));

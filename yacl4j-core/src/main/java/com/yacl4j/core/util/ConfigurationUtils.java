@@ -1,18 +1,33 @@
 package com.yacl4j.core.util;
 
+import java.io.File;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonPointer;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.module.mrbean.MrBeanModule;
 
 public class ConfigurationUtils {
 
 	private ConfigurationUtils() { }
 	
-	private static final ObjectMapper DEFAULT_OBJECT_MAPPER = JacksonUtils.objectMapper(null);
+	private static final ObjectMapper DEFAULT_OBJECT_MAPPER = Yaml.YAML_OBJECT_MAPPER;
+	
+	private static ObjectMapper objectMapper(JsonFactory jsonFactory) {
+		return new ObjectMapper(jsonFactory)
+				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+				.registerModule(new MrBeanModule())
+				.registerModule(new Jdk8Module());
+	}
 	
 	public static ObjectNode emptyConfiguration() {
 		return DEFAULT_OBJECT_MAPPER.createObjectNode();
@@ -53,6 +68,95 @@ public class ConfigurationUtils {
 	        }
 	    }
 	    return mainNode;
+	}
+	
+	public static class Yaml {
+		
+		private Yaml() { }
+		
+		private static final ObjectMapper YAML_OBJECT_MAPPER = objectMapper(new YAMLFactory());
+		
+		public static JsonNode fromFile(File configuration) {
+			try {
+				return YAML_OBJECT_MAPPER.readTree(configuration);
+			} catch (Exception exception) {
+				throw new IllegalStateException(exception);
+			}
+		}
+		
+		public static JsonNode fromString(String configuration) {
+			try {
+				return YAML_OBJECT_MAPPER.readTree(configuration);
+			} catch (Exception exception) {
+				throw new IllegalStateException(exception);
+			}
+		}
+		
+	}
+	
+	public static class Json {
+		
+		private Json() { }
+		
+		private static final ObjectMapper JSON_OBJECT_MAPPER = objectMapper(null);
+		
+		public static JsonNode fromFile(File configuration) {
+			try {
+				return JSON_OBJECT_MAPPER.readTree(configuration);
+			} catch (Exception exception) {
+				throw new IllegalStateException(exception);
+			}
+		}
+		
+		public static JsonNode fromString(String configuration) {
+			try {
+				return JSON_OBJECT_MAPPER.readTree(configuration);
+			} catch (Exception exception) {
+				throw new IllegalStateException(exception);
+			}
+		}
+		
+	}
+	
+	public static class Properties {
+		
+		private Properties() { }
+		
+		public static JsonNode fromFile(File configuration) {
+			return fromProperties(PropertiesUtils.fromFile(configuration));
+		}
+		
+		public static JsonNode fromString(String configuration) {
+			return fromProperties(PropertiesUtils.fromString(configuration));
+		}
+		
+		public static JsonNode fromProperties(java.util.Properties properties) {
+			ObjectNode configuration = ConfigurationUtils.emptyConfiguration();
+			Enumeration<?> propertyNames = properties.propertyNames();
+			while (propertyNames.hasMoreElements()) {
+				String propertyKey = (String) propertyNames.nextElement();
+				JsonPointer propertyKeyAsJsonPointer = JsonPointerUtils.fromProperty(propertyKey);
+				addNode(configuration, propertyKeyAsJsonPointer, properties.getProperty(propertyKey));
+			}
+			return configuration;
+		}
+		
+		private static void addNode(ObjectNode root, JsonPointer keyAsJsonPointer, String valueAsString) {
+			ObjectNode currentNode = root;
+			for (JsonPointer head : JsonPointerUtils.heads(keyAsJsonPointer)) {
+				JsonNode headAsJsonNode = root.at(head);
+				if (headAsJsonNode.isMissingNode() || headAsJsonNode.isValueNode()) {
+					currentNode = currentNode.putObject(head.last().getMatchingProperty());
+				} else {
+					currentNode = (ObjectNode) headAsJsonNode;					
+				}
+			}
+			if (!currentNode.has(keyAsJsonPointer.last().getMatchingProperty())) {
+				JsonNode propertyValueAsJsonNode = ConfigurationUtils.fromString(valueAsString);
+				currentNode.set(keyAsJsonPointer.last().getMatchingProperty(), propertyValueAsJsonNode);
+			}
+		}
+		
 	}
 	
 }

@@ -6,7 +6,9 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonPointer;
 
 public class JsonPointerUtils {
-
+	
+	private JsonPointerUtils() { }
+	
 	private static final JsonPointer EMPTY_JSON_POINTER = JsonPointer.compile("");
 
 	public static JsonPointer fromProperty(String property) {
@@ -25,5 +27,5 @@ public class JsonPointerUtils {
 		}
 		return heads;
 	}
-
+	
 }
