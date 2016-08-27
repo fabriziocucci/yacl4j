@@ -5,6 +5,7 @@ import java.net.URL;
 
 import com.yacl4j.core.ConfigurationBuilder;
 import com.yacl4j.core.ConfigurationSource;
+import com.yacl4j.core.util.ConfigurationUtils;
 import com.yacl4j.core.util.FileUtils;
 
 public class ConfigurationSourceBuilder {
@@ -47,11 +48,11 @@ public class ConfigurationSourceBuilder {
 	
 	private ConfigurationSource selectFileConfigurationSource(File file) {
 		if (file.getName().endsWith(".properties")) {
-			return new PropertiesFileConfigurationSource(file);
+			return new FileConfigurationSource(file, ConfigurationUtils.Properties::fromFile);
 		} else if (file.getName().endsWith(".yaml")) {
-			return new YamlFileConfigurationSource(file);
+			return new FileConfigurationSource(file, ConfigurationUtils.Yaml::fromFile);
 		} else if (file.getName().endsWith(".json")) {
-			return new JsonFileConfigurationSource(file);
+			return new FileConfigurationSource(file, ConfigurationUtils.Json::fromFile);
 		} else {
 			throw new IllegalStateException("Configuration format not supported: " + file);
 		}
