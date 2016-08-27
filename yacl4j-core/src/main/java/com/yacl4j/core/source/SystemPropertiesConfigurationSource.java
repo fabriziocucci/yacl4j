@@ -2,11 +2,15 @@ package com.yacl4j.core.source;
 
 import java.util.Properties;
 
-class SystemPropertiesConfigurationSource extends AbstractPropertiesConfigurationSource {
-	
+import com.fasterxml.jackson.databind.JsonNode;
+import com.yacl4j.core.ConfigurationSource;
+import com.yacl4j.core.util.PropertiesConfigurationUtils;
+
+class SystemPropertiesConfigurationSource implements ConfigurationSource {
+
 	@Override
-	protected Properties getProperties() {
-		return (Properties) System.getProperties().clone();
+	public JsonNode getConfiguration() {
+		return PropertiesConfigurationUtils.fromProperties((Properties) System.getProperties().clone());
 	}
 	
 }

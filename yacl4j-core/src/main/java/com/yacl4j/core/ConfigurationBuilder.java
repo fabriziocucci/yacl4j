@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.yacl4j.core.placeholder.NonRecursivePlaceholderResolver;
 import com.yacl4j.core.source.ConfigurationSourceBuilder;
-import com.yacl4j.core.util.JacksonUtils;
+import com.yacl4j.core.util.ConfigurationUtils;
 
 public class ConfigurationBuilder {
 
@@ -34,13 +34,13 @@ public class ConfigurationBuilder {
 	public <T> T build(Class<T> applicationConfigurationClass) {
 		JsonNode applicationConfiguration = mergeConfigurationSources();
 		this.placeholderResolver.resolvePlaceholders(applicationConfiguration);
-		return JacksonUtils.yamlObjectMapper().treeToValueUnchecked(applicationConfiguration, applicationConfigurationClass);
+		return ConfigurationUtils.toValue(applicationConfiguration, applicationConfigurationClass);
 	}
 	
 	private JsonNode mergeConfigurationSources() {
 		return configurationSources.stream()
 				.map(ConfigurationSource::getConfiguration)
-				.reduce(JacksonUtils.yamlObjectMapper().createObjectNode(), JacksonUtils::merge);
+				.reduce(ConfigurationUtils.emptyConfiguration(), ConfigurationUtils::merge);
 	}
 	
 }

@@ -4,7 +4,7 @@ import java.io.File;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.yacl4j.core.ConfigurationSource;
-import com.yacl4j.core.util.JacksonUtils;
+import com.yacl4j.core.util.YamlConfigurationUtils;
 
 class YamlFileConfigurationSource implements ConfigurationSource {
 	
@@ -16,11 +16,7 @@ class YamlFileConfigurationSource implements ConfigurationSource {
 
 	@Override
 	public JsonNode getConfiguration() {
-		try {
-			return JacksonUtils.yamlObjectMapper().readTree(configurationFile);
-		} catch (Exception e) {
-			throw new IllegalStateException("Unable to read configuration file", e);
-		}
+		return YamlConfigurationUtils.fromFile(configurationFile);
 	}
 
 }

@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.yacl4j.core.util.JacksonUtils;
 import com.yacl4j.core.util.JsonPointerUtils;
+import com.yacl4j.core.util.YamlConfigurationUtils;
 
 public class SystemPropertiesConfigurationSourceTest {
 
@@ -79,7 +79,7 @@ public class SystemPropertiesConfigurationSourceTest {
 	public void testSystemPropertyWhenTheValueIsAnObject() {
 		
 		String propertyKey = "object";
-		JsonNode propertyValue = JacksonUtils.yamlObjectMapper().readValueAsJsonNode("key: value");
+		JsonNode propertyValue = YamlConfigurationUtils.fromString("key: value");
 		System.setProperty(propertyKey, propertyValue.toString());
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
@@ -92,7 +92,7 @@ public class SystemPropertiesConfigurationSourceTest {
 	public void testSystemPropertyWhenTheValueIsAnArray() {
 		
 		String propertyKey = "array";
-		JsonNode propertyValue = JacksonUtils.yamlObjectMapper().readValueAsJsonNode("- element");
+		JsonNode propertyValue = YamlConfigurationUtils.fromString("- element");
 		System.setProperty(propertyKey, propertyValue.toString());
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();

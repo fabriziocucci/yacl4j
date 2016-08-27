@@ -9,17 +9,16 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.yacl4j.core.util.JacksonUtils;
 
-public class JacksonUtilsTest {
+public class ConfigurationUtilsTest {
 
 	@Test
 	public void testMergeWhenNonOverlappingTreesAreMerged() throws JsonProcessingException, IOException {
 		
-		JsonNode mainNode = JacksonUtils.yamlObjectMapper().readTree("hello: yaml");
-		JsonNode updateNode = JacksonUtils.yamlObjectMapper().readTree("goodbye: json");
+		JsonNode mainNode = YamlConfigurationUtils.fromString("hello: yaml");
+		JsonNode updateNode = YamlConfigurationUtils.fromString("goodbye: json");
 		
-		JsonNode merge = JacksonUtils.merge(mainNode, updateNode);
+		JsonNode merge = ConfigurationUtils.merge(mainNode, updateNode);
 		assertThat(merge.get("hello"), is(equalTo(mainNode.get("hello"))));
 		assertThat(merge.get("goodbye"), is(equalTo(updateNode.get("goodbye"))));
 	}
@@ -27,10 +26,10 @@ public class JacksonUtilsTest {
 	@Test
 	public void testMergeWhenOverlappingTreesAreMerged() throws JsonProcessingException, IOException {
 		
-		JsonNode mainNode = JacksonUtils.yamlObjectMapper().readTree("hello: yaml");
-		JsonNode updateNode = JacksonUtils.yamlObjectMapper().readTree("hello: json");
+		JsonNode mainNode = YamlConfigurationUtils.fromString("hello: yaml");
+		JsonNode updateNode = YamlConfigurationUtils.fromString("hello: json");
 		
-		JsonNode merge = JacksonUtils.merge(mainNode, updateNode);
+		JsonNode merge = ConfigurationUtils.merge(mainNode, updateNode);
 		assertThat(merge.get("hello"), is(equalTo(updateNode.get("hello"))));
 	}
 	

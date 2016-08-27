@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import com.yacl4j.core.util.JacksonUtils;
+import com.yacl4j.core.util.YamlConfigurationUtils;
 
 public class NonRecursivePlaceholderResolverTest {
 	
@@ -37,7 +37,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "- e0"
 				, "- ${0}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -54,7 +54,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "array:"
 				, "  - ${element0}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -69,7 +69,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "array:"
 				, "  - ${element0},${element0}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -87,7 +87,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "array:"
 				, "  - ${element0},${element1}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -105,7 +105,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "array1:"
 				, "  - ${array0}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -123,7 +123,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "array:"
 				, "  - ${object}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -142,7 +142,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "array1:"
 				, "  - ${property},${array0}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -161,7 +161,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "array:"
 				, "  - ${property},${object}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -181,7 +181,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "element0: e0"
 				, "element1: ${element0}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -198,7 +198,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "  - e0"
 				, "element1: ${array/0}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -215,7 +215,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "  - e0"
 				, "element1: ${array}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -232,7 +232,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "  property0: v0"
 				, "element1: ${object}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -251,7 +251,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "object:"
 				, "  property: ${property},${array}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
@@ -270,7 +270,7 @@ public class NonRecursivePlaceholderResolverTest {
 				, "object1:"
 				, "  property: ${property},${object0}");
 		
-		JsonNode applicationConfiguration = JacksonUtils.yamlObjectMapper().readTree(configuration);
+		JsonNode applicationConfiguration = YamlConfigurationUtils.fromString(configuration);
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
