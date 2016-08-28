@@ -3,6 +3,7 @@ package com.yacl4j.core.util;
 import java.io.File;
 import java.io.FileReader;
 import java.io.StringReader;
+import java.util.Map;
 import java.util.Properties;
 
 class PropertiesUtils {
@@ -27,6 +28,12 @@ class PropertiesUtils {
 		} catch (Exception exception) {
 			throw new IllegalStateException("Unable to load properties from string: " + string, exception);
 		}
+	}
+	
+	static Properties fromMap(Map<?, ?> map) {
+		Properties properties = new Properties();
+		properties.putAll(map);
+		return properties;
 	}
 	
 }
