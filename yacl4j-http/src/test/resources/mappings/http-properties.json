@@ -1,0 +1,13 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/http/properties"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "text/plain"
+        },
+        "body": "http=properties"
+    }
+}
