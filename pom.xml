@@ -12,6 +12,7 @@
 
 	<modules>
 		<module>yacl4j-core</module>
+		<module>yacl4j-http</module>
 	</modules>
 
 	<licenses>
