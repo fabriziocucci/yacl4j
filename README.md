@@ -29,7 +29,7 @@ Set up your favorite dependency management tool:
   <dependency>
     <groupId>com.github.fabriziocucci</groupId>
     <artifactId>yacl4j-core</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
   </dependency>
 </dependencies>
 ```
@@ -37,7 +37,7 @@ Set up your favorite dependency management tool:
 #### Gradle
 ```groovy
 dependencies {
-  compile group: "com.github.fabriziocucci", name:"yacl4j-core", version: "0.3.0"
+  compile group: "com.github.fabriziocucci", name:"yacl4j-core", version: "0.4.0"
 }
 ```
 
