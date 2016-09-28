@@ -2,10 +2,12 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.3.0...HEAD)
+### Added
+- Introduced http module.
 ### Changed
 - Aligned ConfigurationSource for environment variables to the one for system properties, i.e. environment variables specified as json pointers are interpreted as such. 
-### Changed
 - The FileConfigurationSource is now based on the InputStream abstraction. The only visible side effect of this change is the possibility to load configuration files embedded in some other jar on the classpath.
+
 
 ## [0.3.0](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.2.0...yacl4j-0.3.0)
 ### Added
