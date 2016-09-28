@@ -1,6 +1,6 @@
 package com.yacl4j.core.util;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -75,7 +75,7 @@ public class ConfigurationUtils {
 		
 		private static final ObjectMapper YAML_OBJECT_MAPPER = objectMapper(new YAMLFactory());
 		
-		public static JsonNode fromFile(File configuration) {
+		public static JsonNode fromInputStream(InputStream configuration) {
 			try {
 				return YAML_OBJECT_MAPPER.readTree(configuration);
 			} catch (Exception exception) {
@@ -99,7 +99,7 @@ public class ConfigurationUtils {
 		
 		private static final ObjectMapper JSON_OBJECT_MAPPER = objectMapper(null);
 		
-		public static JsonNode fromFile(File configuration) {
+		public static JsonNode fromInputStream(InputStream configuration) {
 			try {
 				return JSON_OBJECT_MAPPER.readTree(configuration);
 			} catch (Exception exception) {
@@ -121,8 +121,8 @@ public class ConfigurationUtils {
 		
 		private Properties() { }
 		
-		public static JsonNode fromFile(File configuration) {
-			return fromProperties(PropertiesUtils.fromFile(configuration));
+		public static JsonNode fromInputStream(InputStream configuration) {
+			return fromProperties(PropertiesUtils.fromInputStream(configuration));
 		}
 		
 		public static JsonNode fromString(String configuration) {

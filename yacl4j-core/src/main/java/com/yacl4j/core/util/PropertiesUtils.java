@@ -1,7 +1,6 @@
 package com.yacl4j.core.util;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.util.Map;
 import java.util.Properties;
@@ -10,13 +9,13 @@ class PropertiesUtils {
 
 	private PropertiesUtils() { }
 	
-	static Properties fromFile(File file) {
-		try (FileReader fileInputStream = new FileReader(file)) {
+	static Properties fromInputStream(InputStream inputStream) {
+		try {
 			Properties properties = new Properties();
-			properties.load(fileInputStream);
+			properties.load(inputStream);
 			return properties;
 		} catch (Exception exception) {
-			throw new IllegalStateException("Unable to load properties from file: " + file, exception);
+			throw new IllegalStateException("Unable to load properties from input stream", exception);
 		}
 	}
 	

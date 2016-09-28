@@ -1,60 +1,61 @@
 package com.yacl4j.core.source;
 
 import java.io.File;
-import java.net.URL;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.function.Function;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.yacl4j.core.ConfigurationSource;
 import com.yacl4j.core.util.ConfigurationUtils;
-import com.yacl4j.core.util.FileUtils;
 
 class FileConfigurationSource implements ConfigurationSource {
 
-	private final File configurationFile;
-	private final Function<File, JsonNode> configurationFileReader;
+	private final InputStream configurationInputStream;
+	private final Function<InputStream, JsonNode> configurationInputStreamReader;
 	
-	public FileConfigurationSource(File configurationFile, Function<File, JsonNode> configurationFileReader) {
-		this.configurationFile = configurationFile;
-		this.configurationFileReader = configurationFileReader;
+	FileConfigurationSource(InputStream configurationInputStream, Function<InputStream, JsonNode> configurationInputStreamReader) {
+		this.configurationInputStream = configurationInputStream;
+		this.configurationInputStreamReader = configurationInputStreamReader;
 	}
 
 	@Override
 	public JsonNode getConfiguration() {
-		return configurationFileReader.apply(configurationFile);
+		return configurationInputStreamReader.apply(configurationInputStream);
 	}
 	
 	static FileConfigurationSource fromFileOnClasspath(String filename) {
-		URL configurationUrl = FileConfigurationSource.class.getClassLoader().getResource(filename);
-		if (configurationUrl != null) {
-			return selectFileConfigurationSource(FileUtils.toFile(configurationUrl));
+		InputStream configurationInputStream = FileConfigurationSource.class.getClassLoader().getResourceAsStream(filename);
+		if (configurationInputStream != null) {
+			return selectFileConfigurationSource(filename, configurationInputStream);
 		} else {
 			throw new IllegalStateException("Unable to find file on classpath: " + filename);
 		}
 	}
 	
 	static FileConfigurationSource fromFileOnPath(String filename) {
-		File configurationFile = new File(filename);
-		if (configurationFile.exists()) {
-			return selectFileConfigurationSource(configurationFile);
-		} else {
+		try {
+			FileInputStream fileInputStream = new FileInputStream(filename);
+			return selectFileConfigurationSource(filename, fileInputStream);
+		} catch (FileNotFoundException fileNotFoundException) {
 			throw new IllegalStateException("Unable to find file on path: " + filename);
 		}
 	}
 	
 	static FileConfigurationSource fromFile(File file) {
-		return selectFileConfigurationSource(file);
+		return FileConfigurationSource.fromFileOnPath(file.getAbsolutePath());
 	}
 	
-	private static FileConfigurationSource selectFileConfigurationSource(File file) {
-		if (file.getName().endsWith(".properties")) {
-			return new FileConfigurationSource(file, ConfigurationUtils.Properties::fromFile);
-		} else if (file.getName().endsWith(".yaml")) {
-			return new FileConfigurationSource(file, ConfigurationUtils.Yaml::fromFile);
-		} else if (file.getName().endsWith(".json")) {
-			return new FileConfigurationSource(file, ConfigurationUtils.Json::fromFile);
+	private static FileConfigurationSource selectFileConfigurationSource(String filename, InputStream configurationInputStream) {
+		if (filename.endsWith(".properties")) {
+			return new FileConfigurationSource(configurationInputStream, ConfigurationUtils.Properties::fromInputStream);
+		} else if (filename.endsWith(".yaml")) {
+			return new FileConfigurationSource(configurationInputStream, ConfigurationUtils.Yaml::fromInputStream);
+		} else if (filename.endsWith(".json")) {
+			return new FileConfigurationSource(configurationInputStream, ConfigurationUtils.Json::fromInputStream);
 		} else {
-			throw new IllegalStateException("Configuration format not supported: " + file);
+			throw new IllegalStateException("Configuration format not supported: " + filename);
 		}
 	}
 	
