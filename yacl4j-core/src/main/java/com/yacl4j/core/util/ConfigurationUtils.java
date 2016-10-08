@@ -28,7 +28,7 @@ public class ConfigurationUtils {
 				.registerModule(new Jdk8Module());
 	}
 	
-	public static ObjectNode emptyConfiguration() {
+	public static JsonNode emptyConfiguration() {
 		return DEFAULT_OBJECT_MAPPER.createObjectNode();
 	}
 	
@@ -142,7 +142,7 @@ public class ConfigurationUtils {
 		}
 		
 		public static JsonNode fromProperties(java.util.Properties properties) {
-			ObjectNode configuration = ConfigurationUtils.emptyConfiguration();
+			ObjectNode configuration = (ObjectNode) ConfigurationUtils.emptyConfiguration();
 			for (String propertyKey : properties.stringPropertyNames()) {
 				JsonPointer propertyKeyAsJsonPointer = JsonPointerUtils.fromProperty(propertyKey);
 				addNode(configuration, propertyKeyAsJsonPointer, properties.getProperty(propertyKey));
