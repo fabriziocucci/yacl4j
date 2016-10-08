@@ -77,7 +77,9 @@ public class ConfigurationUtils {
 		
 		public static JsonNode fromInputStream(InputStream configuration) {
 			try {
-				return YAML_OBJECT_MAPPER.readTree(configuration);
+				return (configuration.available() > 0) ?
+						YAML_OBJECT_MAPPER.readTree(configuration) :
+						emptyConfiguration();
 			} catch (Exception exception) {
 				throw new IllegalStateException(exception);
 			}
@@ -85,7 +87,9 @@ public class ConfigurationUtils {
 		
 		public static JsonNode fromString(String configuration) {
 			try {
-				return YAML_OBJECT_MAPPER.readTree(configuration);
+				return (configuration.isEmpty()) ?
+						emptyConfiguration() :
+						YAML_OBJECT_MAPPER.readTree(configuration);
 			} catch (Exception exception) {
 				throw new IllegalStateException(exception);
 			}
@@ -101,7 +105,9 @@ public class ConfigurationUtils {
 		
 		public static JsonNode fromInputStream(InputStream configuration) {
 			try {
-				return JSON_OBJECT_MAPPER.readTree(configuration);
+				return (configuration.available() > 0) ?
+						JSON_OBJECT_MAPPER.readTree(configuration) :
+						emptyConfiguration();
 			} catch (Exception exception) {
 				throw new IllegalStateException(exception);
 			}
@@ -109,7 +115,9 @@ public class ConfigurationUtils {
 		
 		public static JsonNode fromString(String configuration) {
 			try {
-				return JSON_OBJECT_MAPPER.readTree(configuration);
+				return (configuration.isEmpty()) ?
+						emptyConfiguration() :
+						JSON_OBJECT_MAPPER.readTree(configuration);
 			} catch (Exception exception) {
 				throw new IllegalStateException(exception);
 			}

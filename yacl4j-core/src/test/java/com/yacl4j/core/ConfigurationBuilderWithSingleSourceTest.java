@@ -56,6 +56,39 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	}
 	
 	@Test
+	public void testConfigurationBuilderWhenYamlFileIsEmpty() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile("", ".yaml"))
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenJsonFileIsEmpty() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile("", ".json"))
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenPropertiesFileIsEmpty() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile("", ".properties"))
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
 	public void testConfigurationBuilderWithYamlFile() throws IOException {
 		
 		String configurationAsString = String.join(System.getProperty("line.separator")
@@ -134,6 +167,39 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	}
 	
 	@Test
+	public void testConfigurationBuilderWhenYamlFileFromPathIsEmpty() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().fileFromPath(createConfigurationFile("", ".yaml").getAbsolutePath())
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenJsonFileFromPathIsEmpty() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().fileFromPath(createConfigurationFile("", ".json").getAbsolutePath())
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenPropertiesFileFromPathIsEmpty() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().fileFromPath(createConfigurationFile("", ".properties").getAbsolutePath())
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
 	public void testConfigurationBuilderWithYamlFileFromPath() throws IOException {
 		
 		String configurationAsString = String.join(System.getProperty("line.separator")
@@ -209,6 +275,39 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		ConfigurationBuilder.newBuilder()
 				.source().fileFromClasspath("i-dont-exist.properties")
 				.build(JsonNode.class);
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenYamlFileFromClasspathIsEmpty() {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().fileFromClasspath("im-empty.yaml")
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenJsonFileFromClasspathIsEmpty() {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().fileFromClasspath("im-empty.json")
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenPropertiesFileFromClasspathIsEmpty() {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().fileFromClasspath("im-empty.properties")
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
 	}
 	
 	@Test
