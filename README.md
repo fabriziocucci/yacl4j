@@ -16,7 +16,7 @@ yacl4j:
 - is easy to use and extend;
 - is heavily based on the well-known and battle-tested [Jackson](https://github.com/FasterXML/jackson) library;
 - supports hierarchical configurations by design;
-- supports configurations in YAML and Properties format;
+- supports configurations in Yaml, Json and Properties format;
 - supports configurations from file, classpath, system properties, environment variables and user-defined sources;
 - supports placeholders resolution.
 
