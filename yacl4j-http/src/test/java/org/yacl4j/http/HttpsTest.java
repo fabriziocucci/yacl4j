@@ -18,9 +18,9 @@ public class HttpsTest {
 
 	@ClassRule
 	public static final WireMockRule WIRE_MOCK_RULE = new WireMockRule(wireMockConfig()
-		    .httpsPort(8443)
-		    .keystorePath("src/test/resources/test.jks")
-		    .keystorePassword("changeit"));
+			.httpsPort(8443)
+			.keystorePath("src/test/resources/test.jks")
+			.keystorePassword("changeit"));
 	
 	@Test
 	public void testThatYamlConfigurationIsRetrieved() {

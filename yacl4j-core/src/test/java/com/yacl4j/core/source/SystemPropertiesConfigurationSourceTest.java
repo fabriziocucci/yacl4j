@@ -29,12 +29,12 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Properties getProperties() {
-	        	Properties properties = new Properties();
-	        	properties.setProperty(systemPropertyKey, systemPropertyValue);
-	            return properties;
-	        }
-	    };
+			Properties getProperties() {
+				Properties properties = new Properties();
+				properties.setProperty(systemPropertyKey, systemPropertyValue);
+				return properties;
+			}
+		};
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
 		
@@ -50,12 +50,12 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Properties getProperties() {
-	        	Properties properties = new Properties();
-	        	properties.setProperty(systemPropertyKey, systemPropertyValue);
-	            return properties;
-	        }
-	    };
+			Properties getProperties() {
+				Properties properties = new Properties();
+				properties.setProperty(systemPropertyKey, systemPropertyValue);
+				return properties;
+			}
+		};
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
 		
@@ -74,13 +74,13 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Properties getProperties() {
-	        	Properties properties = new Properties();
-	        	properties.setProperty(systemProperty1Key, systemProperty1Value);
-	        	properties.setProperty(systemProperty2Key, systemProperty2Value);
-	            return properties;
-	        }
-	    };
+			Properties getProperties() {
+				Properties properties = new Properties();
+				properties.setProperty(systemProperty1Key, systemProperty1Value);
+				properties.setProperty(systemProperty2Key, systemProperty2Value);
+				return properties;
+			}
+		};
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
 		
@@ -99,12 +99,12 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Properties getProperties() {
-	        	Properties properties = new Properties();
-	        	properties.setProperty(systemPropertyKey, systemPropertyValue.toString());
-	            return properties;
-	        }
-	    };
+			Properties getProperties() {
+				Properties properties = new Properties();
+				properties.setProperty(systemPropertyKey, systemPropertyValue.toString());
+				return properties;
+			}
+		};
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
 		
@@ -120,12 +120,12 @@ public class SystemPropertiesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Properties getProperties() {
-	        	Properties properties = new Properties();
-	        	properties.setProperty(systemPropertyKey, systemPropertyValue.toString());
-	            return properties;
-	        }
-	    };
+			Properties getProperties() {
+				Properties properties = new Properties();
+				properties.setProperty(systemPropertyKey, systemPropertyValue.toString());
+				return properties;
+			}
+		};
 		
 		JsonNode configuration = systemPropertiesConfigurationSource.getConfiguration();
 		

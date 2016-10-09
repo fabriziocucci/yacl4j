@@ -49,20 +49,20 @@ public class ConfigurationUtils {
 	}
 	
 	public static JsonNode merge(JsonNode mainNode, JsonNode updateNode) {
-	    Iterator<String> fieldNames = updateNode.fieldNames();
-	    while (fieldNames.hasNext()) {
-	        String fieldName = fieldNames.next();
-	        JsonNode jsonNode = mainNode.get(fieldName);
-	        if (jsonNode != null && jsonNode.isObject()) {
-	            merge(jsonNode, updateNode.get(fieldName));
-	        } else {
-	            if (mainNode instanceof ObjectNode) {
-	                JsonNode value = updateNode.get(fieldName);
-	                ((ObjectNode) mainNode).set(fieldName, value);
-	            }
-	        }
-	    }
-	    return mainNode;
+		Iterator<String> fieldNames = updateNode.fieldNames();
+		while (fieldNames.hasNext()) {
+			String fieldName = fieldNames.next();
+			JsonNode jsonNode = mainNode.get(fieldName);
+			if (jsonNode != null && jsonNode.isObject()) {
+				merge(jsonNode, updateNode.get(fieldName));
+			} else {
+				if (mainNode instanceof ObjectNode) {
+					JsonNode value = updateNode.get(fieldName);
+					((ObjectNode) mainNode).set(fieldName, value);
+				}
+			}
+		}
+		return mainNode;
 	}
 	
 	public static class Yaml {

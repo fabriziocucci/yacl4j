@@ -30,16 +30,16 @@ public class EnvironmentVariablesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Map<String,String> getenv() {
-	        	Map<String, String> environmentVariables = new HashMap<>();
-	        	environmentVariables.put(environmentVariableKey, environmentVariableValue);
-	            return environmentVariables;
-	        }
-	    };
-	    
-	    JsonNode configuration = environmentVariablesConfigurationSource.getConfiguration();
-	    
-	    String actualEnvironmentVariableValue = configuration.at(JsonPointerUtils.fromProperty(environmentVariableKey)).asText();
+			Map<String,String> getenv() {
+				Map<String, String> environmentVariables = new HashMap<>();
+				environmentVariables.put(environmentVariableKey, environmentVariableValue);
+				return environmentVariables;
+			}
+		};
+		
+		JsonNode configuration = environmentVariablesConfigurationSource.getConfiguration();
+		
+		String actualEnvironmentVariableValue = configuration.at(JsonPointerUtils.fromProperty(environmentVariableKey)).asText();
 		assertThat(actualEnvironmentVariableValue, is(equalTo(environmentVariableValue)));
 	}
 	
@@ -51,16 +51,16 @@ public class EnvironmentVariablesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Map<String,String> getenv() {
-	        	Map<String, String> environmentVariables = new HashMap<>();
-	        	environmentVariables.put(environmentVariableKey, environmentVariableValue);
-	            return environmentVariables;
-	        }
-	    };
-	    
-	    JsonNode configuration = environmentVariablesConfigurationSource.getConfiguration();
-	    
-	    String actualEnvironmentVariableValue = configuration.at(JsonPointerUtils.fromProperty(environmentVariableKey)).asText();
+			Map<String,String> getenv() {
+				Map<String, String> environmentVariables = new HashMap<>();
+				environmentVariables.put(environmentVariableKey, environmentVariableValue);
+				return environmentVariables;
+			}
+		};
+		
+		JsonNode configuration = environmentVariablesConfigurationSource.getConfiguration();
+		
+		String actualEnvironmentVariableValue = configuration.at(JsonPointerUtils.fromProperty(environmentVariableKey)).asText();
 		assertThat(actualEnvironmentVariableValue, is(equalTo(environmentVariableValue)));
 	}
 	
@@ -75,13 +75,13 @@ public class EnvironmentVariablesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Map<String,String> getenv() {
-	        	Map<String, String> environmentVariables = new HashMap<>();
-	        	environmentVariables.put(environmentVariable1Key, environmentVariable1Value);
-	        	environmentVariables.put(environmentVariable2Key, environmentVariable2Value);
-	            return environmentVariables;
-	        }
-	    };
+			Map<String,String> getenv() {
+				Map<String, String> environmentVariables = new HashMap<>();
+				environmentVariables.put(environmentVariable1Key, environmentVariable1Value);
+				environmentVariables.put(environmentVariable2Key, environmentVariable2Value);
+				return environmentVariables;
+			}
+		};
 		
 		JsonNode configuration = environmentVariablesConfigurationSource.getConfiguration();
 		
@@ -100,12 +100,12 @@ public class EnvironmentVariablesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Map<String,String> getenv() {
-	        	Map<String, String> environmentVariables = new HashMap<>();
-	        	environmentVariables.put(environmentVariableKey, environmentVariableValue.toString());
-	            return environmentVariables;
-	        }
-	    };
+			Map<String,String> getenv() {
+				Map<String, String> environmentVariables = new HashMap<>();
+				environmentVariables.put(environmentVariableKey, environmentVariableValue.toString());
+				return environmentVariables;
+			}
+		};
 		
 		JsonNode configuration = environmentVariablesConfigurationSource.getConfiguration();
 		
@@ -121,12 +121,12 @@ public class EnvironmentVariablesConfigurationSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Map<String,String> getenv() {
-	        	Map<String, String> environmentVariables = new HashMap<>();
-	        	environmentVariables.put(environmentVariableKey, environmentVariableValue.toString());
-	            return environmentVariables;
-	        }
-	    };
+			Map<String,String> getenv() {
+				Map<String, String> environmentVariables = new HashMap<>();
+				environmentVariables.put(environmentVariableKey, environmentVariableValue.toString());
+				return environmentVariables;
+			}
+		};
 		
 		JsonNode configuration = environmentVariablesConfigurationSource.getConfiguration();
 		

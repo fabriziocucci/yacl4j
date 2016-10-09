@@ -94,7 +94,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		String configurationAsString = String.join(System.getProperty("line.separator")
 				, "property: value"
 				, "nested:"
-				, "  property: nested.value");
+				, "    property: nested.value");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
@@ -110,10 +110,10 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		
 		String configurationAsString = String.join(System.getProperty("line.separator")
 				, "{"
-				, "  \"property\": \"value\","
-				, "  \"nested\": {"
-				, "    \"property\": \"nested.value\""
-				, "  }"
+				, "    \"property\": \"value\","
+				, "    \"nested\": {"
+				, "        \"property\": \"nested.value\""
+				, "    }"
 				, "}");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
@@ -205,7 +205,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		String configurationAsString = String.join(System.getProperty("line.separator")
 				, "property: value"
 				, "nested:"
-				, "  property: nested.value");
+				, "    property: nested.value");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().fileFromPath(createConfigurationFile(configurationAsString, ".yaml").getAbsolutePath())
@@ -221,10 +221,10 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		
 		String configurationAsString = String.join(System.getProperty("line.separator")
 				, "{"
-				, "  \"property\": \"value\","
-				, "  \"nested\": {"
-				, "    \"property\": \"nested.value\""
-				, "  }"
+				, "    \"property\": \"value\","
+				, "    \"nested\": {"
+				, "        \"property\": \"nested.value\""
+				, "    }"
 				, "}");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
@@ -355,13 +355,13 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Properties getProperties() {
-	        	Properties properties = new Properties();
-	        	properties.setProperty("property", "value");
-	        	properties.setProperty("nested/property", "nested.value");
-	            return properties;
-	        }
-	    };
+			Properties getProperties() {
+				Properties properties = new Properties();
+				properties.setProperty("property", "value");
+				properties.setProperty("nested/property", "nested.value");
+				return properties;
+			}
+		};
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().systemProperties()
@@ -381,13 +381,13 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Map<String,String> getenv() {
-	        	Map<String, String> environmentVariables = new HashMap<>();
-	        	environmentVariables.put("property", "value");
-	        	environmentVariables.put("nested.property", "nested.value");
-	            return environmentVariables;
-	        }
-	    };
+			Map<String,String> getenv() {
+				Map<String, String> environmentVariables = new HashMap<>();
+				environmentVariables.put("property", "value");
+				environmentVariables.put("nested.property", "nested.value");
+				return environmentVariables;
+			}
+		};
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().environmentVariables()

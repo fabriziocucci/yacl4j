@@ -45,19 +45,19 @@ public class ConfigurationBuilderWithPlaceholderResolutionTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Properties getProperties() {
-	        	Properties properties = new Properties();
-	        	properties.setProperty("name", "wow");
-	            return properties;
-	        }
-	    };
+			Properties getProperties() {
+				Properties properties = new Properties();
+				properties.setProperty("name", "wow");
+				return properties;
+			}
+		};
 		
-	    JsonNode configuration = ConfigurationBuilder.newBuilder()
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
 				.source().systemProperties()
 				.build(JsonNode.class);
 		
-	    assertThat(configuration, is(notNullValue()));
+		assertThat(configuration, is(notNullValue()));
 		assertThat(configuration.at("/greeting").asText(), is(equalTo("hello wow")));
 	}
 	

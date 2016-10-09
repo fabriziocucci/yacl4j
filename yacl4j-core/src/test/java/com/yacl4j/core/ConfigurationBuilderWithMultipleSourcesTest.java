@@ -35,13 +35,13 @@ public class ConfigurationBuilderWithMultipleSourcesTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Properties getProperties() {
-	        	Properties properties = new Properties();
-	        	properties.setProperty("property", "system.property.value");
-	        	properties.setProperty("nested/property", "system.property.nested.value");
-	            return properties;
-	        }
-	    };
+			Properties getProperties() {
+				Properties properties = new Properties();
+				properties.setProperty("property", "system.property.value");
+				properties.setProperty("nested/property", "system.property.nested.value");
+				return properties;
+			}
+		};
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
 				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
@@ -67,13 +67,13 @@ public class ConfigurationBuilderWithMultipleSourcesTest {
 		
 		new MockUp<System>() {
 			@Mock
-	        Properties getProperties() {
-	        	Properties properties = new Properties();
-	        	properties.setProperty("property2", "value2");
-	        	properties.setProperty("nested/property2", "nested.value2");
-	            return properties;
-	        }
-	    };
+			Properties getProperties() {
+				Properties properties = new Properties();
+				properties.setProperty("property2", "value2");
+				properties.setProperty("nested/property2", "nested.value2");
+				return properties;
+			}
+		};
 		
 		JsonNode configurationWithYamlFileAndSystemProperties = ConfigurationBuilder.newBuilder()
 				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
