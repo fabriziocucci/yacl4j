@@ -40,10 +40,6 @@ public class ConfigurationUtils {
 		}
 	}
 	
-	public static JsonNode fromMap(Map<?, ?> configuration) {
-		return DEFAULT_OBJECT_MAPPER.valueToTree(configuration);
-	}
-	
 	public static <T> T toValue(JsonNode configuration, Class<T> configurationClass) {
 		try {
 			return DEFAULT_OBJECT_MAPPER.treeToValue(configuration, configurationClass);
