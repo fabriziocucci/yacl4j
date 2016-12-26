@@ -89,6 +89,63 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	}
 	
 	@Test
+	public void testConfigurationBuilderWhenYamlFileContainsOnlyWhiteSpaces() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile("   ", ".yaml"))
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenJsonFileContainsOnlyWhiteSpaces() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile("   ", ".json"))
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenPropertiesFileContainsOnlyWhiteSpaces() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile("   ", ".properties"))
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
+	public void testConfigurationBuilderWhenYamlFileContainsOnlyComments() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile("#comment", ".yaml"))
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	// JSON format does not support comments!
+	
+	@Test
+	public void testConfigurationBuilderWhenPropertiesFileContainsOnlyComments() throws IOException {
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().file(createConfigurationFile("#comment", ".properties"))
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.fields().hasNext(), is(false));
+	}
+	
+	@Test
 	public void testConfigurationBuilderWithYamlFile() throws IOException {
 		
 		String configurationAsString = String.join(System.getProperty("line.separator")

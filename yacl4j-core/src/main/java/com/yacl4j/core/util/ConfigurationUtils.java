@@ -3,6 +3,7 @@ package com.yacl4j.core.util;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonPointer;
@@ -73,9 +74,9 @@ public class ConfigurationUtils {
 		
 		public static JsonNode fromInputStream(InputStream configuration) {
 			try {
-				return (configuration.available() > 0) ?
-						YAML_OBJECT_MAPPER.readTree(configuration) :
-						emptyConfiguration();
+				// we need to use this ugly syntax because ObjectMapper::readTree throws in case of empty files (https://github.com/FasterXML/jackson-databind/issues/1406)
+				return Optional.<JsonNode> ofNullable(YAML_OBJECT_MAPPER.getFactory().createParser(configuration).readValueAsTree())
+						.orElseGet(ConfigurationUtils::emptyConfiguration);
 			} catch (Exception exception) {
 				throw new IllegalStateException(exception);
 			}
@@ -101,9 +102,9 @@ public class ConfigurationUtils {
 		
 		public static JsonNode fromInputStream(InputStream configuration) {
 			try {
-				return (configuration.available() > 0) ?
-						JSON_OBJECT_MAPPER.readTree(configuration) :
-						emptyConfiguration();
+				// we need to use this ugly syntax because ObjectMapper::readTree throws in case of empty files (https://github.com/FasterXML/jackson-databind/issues/1406)
+				return Optional.<JsonNode> ofNullable(JSON_OBJECT_MAPPER.getFactory().createParser(configuration).readValueAsTree())
+						.orElseGet(ConfigurationUtils::emptyConfiguration);
 			} catch (Exception exception) {
 				throw new IllegalStateException(exception);
 			}
