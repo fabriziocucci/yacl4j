@@ -3,10 +3,11 @@ package com.yacl4j.core;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.yacl4j.core.placeholder.NonRecursivePlaceholderResolver;
 import com.yacl4j.core.source.ConfigurationSourceBuilder;
 import com.yacl4j.core.util.ConfigurationUtils;
+
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
 public class ConfigurationBuilder {
 

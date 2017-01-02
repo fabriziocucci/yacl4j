@@ -12,11 +12,10 @@ import java.util.Properties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import mockit.Mock;
 import mockit.MockUp;
 import mockit.integration.junit4.JMockit;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
 @RunWith(JMockit.class)
 public class ConfigurationBuilderWithPlaceholderResolutionTest {

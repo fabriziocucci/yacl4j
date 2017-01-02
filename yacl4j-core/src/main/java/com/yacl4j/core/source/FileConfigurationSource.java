@@ -6,9 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.function.Function;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.yacl4j.core.ConfigurationSource;
 import com.yacl4j.core.util.ConfigurationUtils;
+
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
 class FileConfigurationSource implements ConfigurationSource {
 

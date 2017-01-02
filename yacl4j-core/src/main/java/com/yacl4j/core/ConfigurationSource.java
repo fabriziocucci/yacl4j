@@ -1,6 +1,6 @@
 package com.yacl4j.core;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
 public interface ConfigurationSource {
 
