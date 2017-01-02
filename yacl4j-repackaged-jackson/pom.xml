@@ -1,0 +1,125 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.github.fabriziocucci</groupId>
+		<artifactId>yacl4j</artifactId>
+		<version>0.6.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>yacl4j-repackaged-jackson</artifactId>
+
+	<properties>
+		<jackson.version>2.5.4</jackson.version>
+	</properties>
+
+	<!-- making all Jackson dependencies optional ensures that they are processed by the maven-shade-plugin but not included as transitive dependencies of the code that depends on yacl4j-core -->
+
+	<dependencies>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<version>${jackson.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jdk8</artifactId>
+			<version>${jackson.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-mrbean</artifactId>
+			<version>${jackson.version}</version>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<!-- we should generate -source.jar and -javadoc.jar only if the "release" profile is active (for consistency) but it's fairly quick this way -->
+
+	<build>		
+		<plugins>
+		
+			<!-- because of https://issues.apache.org/jira/browse/MSHADE-182, we need to use a snapshot version of the maven-shade-plugin -->
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.0.0-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
+							<createSourcesJar>true</createSourcesJar>
+							<relocations>
+								<relocation>
+									<pattern>com.fasterxml.jackson</pattern>
+									<shadedPattern>yacl4j.repackaged.com.fasterxml.jackson</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>org.objectweb.asm</pattern>
+									<shadedPattern>yacl4j.repackaged.org.objectweb.asm</shadedPattern>
+								</relocation>
+								<relocation>
+									<pattern>org.yaml.snakeyaml</pattern>
+									<shadedPattern>yacl4j.repackaged.org.yaml.snakeyaml</shadedPattern>
+								</relocation>
+							</relocations>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!--
+		
+				According to [this](http://central.sonatype.org/pages/requirements.html#supply-javadoc-and-sources) OSS requirement:
+		
+				> Projects with packaging other than *pom* have to supply JAR files that contain Javadoc and sources. ... If, for some reason (for example, license issue or it's a Scala project), you can not provide *-sources.jar* or *-javadoc.jar* , please make fake *-sources.jar* or *-javadoc.jar* with simple README inside to pass the checking.
+		
+				We are generating the *-source.jar* through the maven-shade-plugin but, because this module does not directly contain any source, the *-javadoc.jar* is not automatically generated. So we are creating a fake *-javadoc.jar* which contains only this file.
+					
+			-->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>empty-javadoc-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>javadoc</classifier>
+							<classesDirectory>${basedir}</classesDirectory>
+							<includes>
+								<include>README.md</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- The maven-shade-plugin version we need (see above) is only available in the Apache snapshot repository -->
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>apache.snapshots</id>
+			<url>http://repository.apache.org/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
+</project>
