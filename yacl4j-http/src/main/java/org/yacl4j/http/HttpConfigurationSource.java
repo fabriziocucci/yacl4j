@@ -4,8 +4,9 @@ import java.util.function.Function;
 
 import javax.ws.rs.client.Invocation;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.yacl4j.core.ConfigurationSource;
+
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
 class HttpConfigurationSource implements ConfigurationSource {
 	

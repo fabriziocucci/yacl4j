@@ -3,7 +3,7 @@ package com.yacl4j.core.util;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonPointer;
+import yacl4j.repackaged.com.fasterxml.jackson.core.JsonPointer;
 
 public class JsonPointerUtils {
 	

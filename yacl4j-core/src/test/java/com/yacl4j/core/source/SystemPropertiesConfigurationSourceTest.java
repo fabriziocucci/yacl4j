@@ -8,13 +8,13 @@ import java.util.Properties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.yacl4j.core.util.ConfigurationUtils;
 import com.yacl4j.core.util.JsonPointerUtils;
 
 import mockit.Mock;
 import mockit.MockUp;
 import mockit.integration.junit4.JMockit;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
 @RunWith(JMockit.class)
 public class SystemPropertiesConfigurationSourceTest {
