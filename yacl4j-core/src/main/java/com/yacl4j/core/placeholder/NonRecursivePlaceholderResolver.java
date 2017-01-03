@@ -8,14 +8,15 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fasterxml.jackson.core.JsonPointer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.MissingNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
 import com.yacl4j.core.PlaceholderResolver;
 import com.yacl4j.core.util.JsonPointerUtils;
+
+import yacl4j.repackaged.com.fasterxml.jackson.core.JsonPointer;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.node.ArrayNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.node.MissingNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.node.ObjectNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.node.TextNode;
 
 public class NonRecursivePlaceholderResolver implements PlaceholderResolver {
 	

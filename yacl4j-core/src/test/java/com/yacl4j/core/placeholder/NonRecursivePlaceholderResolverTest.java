@@ -5,10 +5,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.MissingNode;
-import com.fasterxml.jackson.databind.node.TextNode;
 import com.yacl4j.core.util.ConfigurationUtils;
+
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.node.MissingNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.node.TextNode;
 
 public class NonRecursivePlaceholderResolverTest {
 	

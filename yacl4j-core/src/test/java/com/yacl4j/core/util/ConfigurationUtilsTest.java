@@ -7,8 +7,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
+import yacl4j.repackaged.com.fasterxml.jackson.core.JsonProcessingException;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
 public class ConfigurationUtilsTest {
 

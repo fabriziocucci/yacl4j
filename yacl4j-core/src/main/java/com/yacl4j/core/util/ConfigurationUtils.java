@@ -5,16 +5,16 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonPointer;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.module.mrbean.MrBeanModule;
+import yacl4j.repackaged.com.fasterxml.jackson.core.JsonFactory;
+import yacl4j.repackaged.com.fasterxml.jackson.core.JsonPointer;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.DeserializationFeature;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.ObjectMapper;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.node.ObjectNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.node.TextNode;
+import yacl4j.repackaged.com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import yacl4j.repackaged.com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import yacl4j.repackaged.com.fasterxml.jackson.module.mrbean.MrBeanModule;
 
 public class ConfigurationUtils {
 

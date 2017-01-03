@@ -6,9 +6,10 @@ import static org.junit.Assert.*;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.yacl4j.core.ConfigurationBuilder;
+
+import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
 public class HttpTest {
 

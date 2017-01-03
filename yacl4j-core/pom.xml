@@ -11,7 +11,6 @@
 	<properties>
 		<junit.version>4.12</junit.version>
 		<jmockit.version>1.26</jmockit.version>
-		<jackson.version>2.5.4</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -28,19 +27,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-yaml</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jdk8</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.module</groupId>
-			<artifactId>jackson-module-mrbean</artifactId>
-			<version>${jackson.version}</version>
+			<groupId>com.github.fabriziocucci</groupId>
+			<artifactId>yacl4j-repackaged-jackson</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 
