@@ -6,4 +6,4 @@ jdk:
 # First, the "shade" goal of the maven-shade-plugin is bound to the "package" phase and cannot be anticipated (according to the error message received after trying). 
 # Because the "test" phase happens before the "package" phase, the jar of the repackaged module (i.e. yacl4j-repackaged-jackson) is not available when the compilation of yacl4j-core module happens. 
 # So the "target/classes" folder of yacl4j-repackaged-jackson is used for the compilation of yacl4j-core but that folder is empty because the only purpose of the yacl4j-repackaged-jackson module is to repackage Jackson.
-script: mvn clean package
+script: ./mvnw clean package
