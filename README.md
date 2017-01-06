@@ -228,5 +228,94 @@ Better, right? So, it's really easy to transform flat [Properties](https://docs.
 
 My suggestion? Just use YAML-based configurations if you can!
 
+## Optional configuration sources
+
+In some cases, you may want to specify configuration sources as optional.
+
+#### Optional file
+
+The classic use case is loading the configuration from one or multiple files that can optionally exist. There are three convenient methods for this:
+
+* optional `File`:
+
+```java
+MyConfiguration myConfiguration = ConfigurationBuilder.newBuilder()
+    .optionalSource().fromFile(new File("some-path/application.yaml"))
+    .build(MyConfiguration.class);
+```
+
+* optional file on classpath:
+
+```java
+MyConfiguration myConfiguration = ConfigurationBuilder.newBuilder()
+    .optionalSource().fromFileOnClasspath("application.yaml")
+    .build(MyConfiguration.class);
+```
+
+* optional file on path:
+
+```java
+MyConfiguration myConfiguration = ConfigurationBuilder.newBuilder()
+    .optionalSource().fromFileOnPath("/Users/yacl4j/application.yaml"))
+    .build(MyConfiguration.class);
+```
+
+#### Optional configuration source
+
+Now suppose you have defined a custom configuration source and you want it to be optional.
+
+You just need to:
+
+1. throw a `ConfigurationSourceNotAvailableException` in your `ConfigurationSource` implementation when appropriate, e.g.
+
+```java
+public class MyConfigurationSource implements ConfigurationSource {
+		
+		@Override
+		public JsonNode getConfiguration() {
+			if (isSourceAvailable()) {
+				// ...
+			} else {
+				throw new ConfigurationSourceNotAvailableException();
+			}
+		}
+		
+	}
+```
+
+2. use the `optionalSource` method on the `ConfigurationBuilder` which accepts a `ConfigurationSource` as parameter, e.g.
+
+```java
+MyConfiguration myConfiguration = ConfigurationBuilder.newBuilder()
+    .optionalSource(new MyConfigurationSource())
+    .build(MyConfiguration.class);
+```
+
+If, for some reason, you configuration source eagerly checks the availability of the source while it is being instantiated, you can:
+
+1. throw a `ConfigurationSourceNotAvailableException` in the constructor or factory of your `ConfigurationSource` implementation, e.g.
+
+```java
+public class MyConfigurationSource implements ConfigurationSource {
+		
+		public MyConfigurationSource() {
+			if (isSourceAvailable()) {
+				// ...
+			} else {
+				throw new ConfigurationSourceNotAvailableException();
+			}
+		}
+		
+	}
+```
+
+2. use the `optionalSource` method on the `ConfigurationBuilder` which accepts a `Supplier<ConfigurationSource>` as parameter, e.g. 
+
+```java
+MyConfiguration myConfiguration = ConfigurationBuilder.newBuilder()
+    .optionalSource(() -> new MyConfigurationSource())
+    .build(MyConfiguration.class);
+```
+
 ## License
 yacl4j is released under the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html).
