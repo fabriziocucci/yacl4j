@@ -5,7 +5,7 @@ import java.io.File;
 import com.yacl4j.core.ConfigurationBuilder;
 
 public class ConfigurationSourceBuilder {
-	
+
 	private final ConfigurationBuilder configurationBuilder;
 
 	public ConfigurationSourceBuilder(ConfigurationBuilder configurationBuilder) {

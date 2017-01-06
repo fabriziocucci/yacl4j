@@ -14,6 +14,8 @@ import java.util.Properties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.yacl4j.core.source.optional.ConfigurationSourceNotAvailableException;
+
 import mockit.Mock;
 import mockit.MockUp;
 import mockit.integration.junit4.JMockit;
@@ -26,28 +28,28 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	// file //
 	//////////
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenFileFormatIsNotSupported() {
 		ConfigurationBuilder.newBuilder()
 				.source().file(new File("application.unknown"))
 				.build(JsonNode.class);
 	}
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenYamlFileDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().file(new File("i-dont-exist.yaml"))
 				.build(JsonNode.class);
 	}
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenJsonFileDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().file(new File("i-dont-exist.json"))
 				.build(JsonNode.class);
 	}
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenPropertiesFileDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().file(new File("i-dont-exist.properties"))
@@ -201,21 +203,21 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	// fileFromPath //
 	//////////////////
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenYamlFileFromPathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().fileFromPath("i-dont-exist.yaml")
 				.build(JsonNode.class);
 	}
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenJsonFileFromPathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().fileFromPath("i-dont-exist.json")
 				.build(JsonNode.class);
 	}
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenPropertiesFileFromPathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().fileFromPath("i-dont-exist.properties")
@@ -312,21 +314,21 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	// fileFromClasspath //
 	///////////////////////
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenYamlFileFromClasspathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().fileFromClasspath("i-dont-exist.yaml")
 				.build(JsonNode.class);
 	}
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenJsonFileFromClasspathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().fileFromClasspath("i-dont-exist.json")
 				.build(JsonNode.class);
 	}
 	
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenPropertiesFileFromClasspathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
 				.source().fileFromClasspath("i-dont-exist.properties")

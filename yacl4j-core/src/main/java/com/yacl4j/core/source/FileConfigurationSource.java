@@ -7,16 +7,17 @@ import java.io.InputStream;
 import java.util.function.Function;
 
 import com.yacl4j.core.ConfigurationSource;
+import com.yacl4j.core.source.optional.ConfigurationSourceNotAvailableException;
 import com.yacl4j.core.util.ConfigurationUtils;
 
 import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
-class FileConfigurationSource implements ConfigurationSource {
+public class FileConfigurationSource implements ConfigurationSource {
 
 	private final InputStream configurationInputStream;
 	private final Function<InputStream, JsonNode> configurationInputStreamReader;
 	
-	FileConfigurationSource(InputStream configurationInputStream, Function<InputStream, JsonNode> configurationInputStreamReader) {
+	private FileConfigurationSource(InputStream configurationInputStream, Function<InputStream, JsonNode> configurationInputStreamReader) {
 		this.configurationInputStream = configurationInputStream;
 		this.configurationInputStreamReader = configurationInputStreamReader;
 	}
@@ -26,25 +27,25 @@ class FileConfigurationSource implements ConfigurationSource {
 		return configurationInputStreamReader.apply(configurationInputStream);
 	}
 	
-	static FileConfigurationSource fromFileOnClasspath(String filename) {
+	public static FileConfigurationSource fromFileOnClasspath(String filename) {
 		InputStream configurationInputStream = FileConfigurationSource.class.getClassLoader().getResourceAsStream(filename);
 		if (configurationInputStream != null) {
 			return selectFileConfigurationSource(filename, configurationInputStream);
 		} else {
-			throw new IllegalStateException("Unable to find file on classpath: " + filename);
+			throw new ConfigurationSourceNotAvailableException("Unable to find file on classpath: " + filename);
 		}
 	}
 	
-	static FileConfigurationSource fromFileOnPath(String filename) {
+	public static FileConfigurationSource fromFileOnPath(String filename) {
 		try {
 			FileInputStream fileInputStream = new FileInputStream(filename);
 			return selectFileConfigurationSource(filename, fileInputStream);
 		} catch (FileNotFoundException fileNotFoundException) {
-			throw new IllegalStateException("Unable to find file on path: " + filename);
+			throw new ConfigurationSourceNotAvailableException("Unable to find file on path: " + filename);
 		}
 	}
 	
-	static FileConfigurationSource fromFile(File file) {
+	public static FileConfigurationSource fromFile(File file) {
 		return FileConfigurationSource.fromFileOnPath(file.getAbsolutePath());
 	}
 	
