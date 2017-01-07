@@ -1,7 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.7.0...HEAD)
+## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.8.0...HEAD)
+
+## [yacl4j-0.8.0](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.7.0...yacl4j-0.8.0)
 ### Added
 - Added optional configuration sources. [\#3](https://github.com/fabriziocucci/yacl4j/issues/3)
 ### Changed
