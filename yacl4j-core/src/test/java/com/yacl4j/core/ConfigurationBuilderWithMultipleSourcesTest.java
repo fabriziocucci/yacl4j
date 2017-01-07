@@ -43,8 +43,8 @@ public class ConfigurationBuilderWithMultipleSourcesTest {
 		};
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
-				.source().systemProperties()
+				.source().fromFile(createConfigurationFile(configurationAsString, ".yaml"))
+				.source().fromSystemProperties()
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -75,8 +75,8 @@ public class ConfigurationBuilderWithMultipleSourcesTest {
 		};
 		
 		JsonNode configurationWithYamlFileAndSystemProperties = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
-				.source().systemProperties()
+				.source().fromFile(createConfigurationFile(configurationAsString, ".yaml"))
+				.source().fromSystemProperties()
 				.build(JsonNode.class);
 		
 		assertThat(configurationWithYamlFileAndSystemProperties, is(notNullValue()));

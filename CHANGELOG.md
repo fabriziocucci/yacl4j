@@ -3,11 +3,13 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.7.0...HEAD)
 ### Added
-- Added optional configuration sources [\#3](https://github.com/fabriziocucci/yacl4j/issues/3)
+- Added optional configuration sources. [\#3](https://github.com/fabriziocucci/yacl4j/issues/3)
+### Changed
+- Improved ConfigurationSourceBuilder API by adding "from" as prefix of the builder methods.
 
 ## [0.7.0](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.6.0...yacl4j-0.7.0)
 ### Changed
-- Repackaged Jackson-related dependencies
+- Repackaged Jackson-related dependencies.
 
 ## [0.6.0](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.5.0...yacl4j-0.6.0)
 ### Changed

@@ -31,28 +31,28 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenFileFormatIsNotSupported() {
 		ConfigurationBuilder.newBuilder()
-				.source().file(new File("application.unknown"))
+				.source().fromFile(new File("application.unknown"))
 				.build(JsonNode.class);
 	}
 	
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenYamlFileDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
-				.source().file(new File("i-dont-exist.yaml"))
+				.source().fromFile(new File("i-dont-exist.yaml"))
 				.build(JsonNode.class);
 	}
 	
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenJsonFileDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
-				.source().file(new File("i-dont-exist.json"))
+				.source().fromFile(new File("i-dont-exist.json"))
 				.build(JsonNode.class);
 	}
 	
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenPropertiesFileDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
-				.source().file(new File("i-dont-exist.properties"))
+				.source().fromFile(new File("i-dont-exist.properties"))
 				.build(JsonNode.class);
 	}
 	
@@ -60,7 +60,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenYamlFileIsEmpty() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile("", ".yaml"))
+				.source().fromFile(createConfigurationFile("", ".yaml"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -71,7 +71,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenJsonFileIsEmpty() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile("", ".json"))
+				.source().fromFile(createConfigurationFile("", ".json"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -82,7 +82,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenPropertiesFileIsEmpty() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile("", ".properties"))
+				.source().fromFile(createConfigurationFile("", ".properties"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -93,7 +93,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenYamlFileContainsOnlyWhiteSpaces() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile("   ", ".yaml"))
+				.source().fromFile(createConfigurationFile("   ", ".yaml"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -104,7 +104,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenJsonFileContainsOnlyWhiteSpaces() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile("   ", ".json"))
+				.source().fromFile(createConfigurationFile("   ", ".json"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -115,7 +115,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenPropertiesFileContainsOnlyWhiteSpaces() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile("   ", ".properties"))
+				.source().fromFile(createConfigurationFile("   ", ".properties"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -126,7 +126,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenYamlFileContainsOnlyComments() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile("#comment", ".yaml"))
+				.source().fromFile(createConfigurationFile("#comment", ".yaml"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -139,7 +139,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenPropertiesFileContainsOnlyComments() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile("#comment", ".properties"))
+				.source().fromFile(createConfigurationFile("#comment", ".properties"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -155,7 +155,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 				, "    property: nested.value");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
+				.source().fromFile(createConfigurationFile(configurationAsString, ".yaml"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -175,7 +175,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 				, "}");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile(configurationAsString, ".json"))
+				.source().fromFile(createConfigurationFile(configurationAsString, ".json"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -191,7 +191,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 				, "nested/property=nested.value");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile(configurationAsString, ".properties"))
+				.source().fromFile(createConfigurationFile(configurationAsString, ".properties"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -206,21 +206,21 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenYamlFileFromPathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
-				.source().fileFromPath("i-dont-exist.yaml")
+				.source().fromFileOnPath("i-dont-exist.yaml")
 				.build(JsonNode.class);
 	}
 	
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenJsonFileFromPathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
-				.source().fileFromPath("i-dont-exist.json")
+				.source().fromFileOnPath("i-dont-exist.json")
 				.build(JsonNode.class);
 	}
 	
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenPropertiesFileFromPathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
-				.source().fileFromPath("i-dont-exist.properties")
+				.source().fromFileOnPath("i-dont-exist.properties")
 				.build(JsonNode.class);
 	}
 	
@@ -228,7 +228,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenYamlFileFromPathIsEmpty() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromPath(createConfigurationFile("", ".yaml").getAbsolutePath())
+				.source().fromFileOnPath(createConfigurationFile("", ".yaml").getAbsolutePath())
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -239,7 +239,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenJsonFileFromPathIsEmpty() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromPath(createConfigurationFile("", ".json").getAbsolutePath())
+				.source().fromFileOnPath(createConfigurationFile("", ".json").getAbsolutePath())
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -250,7 +250,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenPropertiesFileFromPathIsEmpty() throws IOException {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromPath(createConfigurationFile("", ".properties").getAbsolutePath())
+				.source().fromFileOnPath(createConfigurationFile("", ".properties").getAbsolutePath())
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -266,7 +266,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 				, "    property: nested.value");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromPath(createConfigurationFile(configurationAsString, ".yaml").getAbsolutePath())
+				.source().fromFileOnPath(createConfigurationFile(configurationAsString, ".yaml").getAbsolutePath())
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -286,7 +286,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 				, "}");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromPath(createConfigurationFile(configurationAsString, ".yaml").getAbsolutePath())
+				.source().fromFileOnPath(createConfigurationFile(configurationAsString, ".yaml").getAbsolutePath())
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -302,7 +302,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 				, "nested/property=nested.value");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromPath(createConfigurationFile(configurationAsString, ".properties").getAbsolutePath())
+				.source().fromFileOnPath(createConfigurationFile(configurationAsString, ".properties").getAbsolutePath())
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -317,21 +317,21 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenYamlFileFromClasspathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
-				.source().fileFromClasspath("i-dont-exist.yaml")
+				.source().fromFileOnClasspath("i-dont-exist.yaml")
 				.build(JsonNode.class);
 	}
 	
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenJsonFileFromClasspathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
-				.source().fileFromClasspath("i-dont-exist.json")
+				.source().fromFileOnClasspath("i-dont-exist.json")
 				.build(JsonNode.class);
 	}
 	
 	@Test(expected=ConfigurationSourceNotAvailableException.class)
 	public void testConfigurationBuilderWhenPropertiesFileFromClasspathDoesNotExist() {
 		ConfigurationBuilder.newBuilder()
-				.source().fileFromClasspath("i-dont-exist.properties")
+				.source().fromFileOnClasspath("i-dont-exist.properties")
 				.build(JsonNode.class);
 	}
 	
@@ -339,7 +339,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenYamlFileFromClasspathIsEmpty() {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromClasspath("im-empty.yaml")
+				.source().fromFileOnClasspath("im-empty.yaml")
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -350,7 +350,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenJsonFileFromClasspathIsEmpty() {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromClasspath("im-empty.json")
+				.source().fromFileOnClasspath("im-empty.json")
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -361,7 +361,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWhenPropertiesFileFromClasspathIsEmpty() {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromClasspath("im-empty.properties")
+				.source().fromFileOnClasspath("im-empty.properties")
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -372,7 +372,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWithYamlFileFromClasspath() {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromClasspath("application.yaml")
+				.source().fromFileOnClasspath("application.yaml")
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -384,7 +384,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWithJsonFileFromClasspath() {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromClasspath("application.json")
+				.source().fromFileOnClasspath("application.json")
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -396,7 +396,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 	public void testConfigurationBuilderWithPropertiesFileFromClasspath() {
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().fileFromClasspath("application.properties")
+				.source().fromFileOnClasspath("application.properties")
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -422,7 +422,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		};
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().systemProperties()
+				.source().fromSystemProperties()
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -448,7 +448,7 @@ public class ConfigurationBuilderWithSingleSourceTest {
 		};
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().environmentVariables()
+				.source().fromEnvironmentVariables()
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
