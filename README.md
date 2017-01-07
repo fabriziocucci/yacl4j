@@ -62,11 +62,11 @@ interface MyConfiguration {
 #### Configuration instantiation
 ```java
 MyConfiguration myConfiguration = ConfigurationBuilder.newBuilder() // #0
-    .source().file(new File("some-path/application.yaml"))          // #1
-    .source().fileFromClasspath("application.yaml")                 // #2
-    .source().fileFromPath("/Users/yacl4j/application.yaml")        // #3
-    .source().systemProperties()                                    // #4
-    .source().environmentVariables()                                // #5
+    .source().fromFile(new File("some-path/application.yaml"))      // #1
+    .source().fromFileFromClasspath("application.yaml")             // #2
+    .source().fromFileFromPath("/Users/yacl4j/application.yaml")    // #3
+    .source().fromSystemProperties()                                // #4
+    .source().fromEnvironmentVariables()                            // #5
     .source(new MyCustomConfigurationSource());                     // #6
     .build(MyConfiguration.class);                                  // #7
 ```
