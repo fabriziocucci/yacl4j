@@ -28,7 +28,7 @@ public class ConfigurationBuilderWithPlaceholderResolutionTest {
 				, "name: world");
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
+				.source().fromFile(createConfigurationFile(configurationAsString, ".yaml"))
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));
@@ -52,8 +52,8 @@ public class ConfigurationBuilderWithPlaceholderResolutionTest {
 		};
 		
 		JsonNode configuration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
-				.source().systemProperties()
+				.source().fromFile(createConfigurationFile(configurationAsString, ".yaml"))
+				.source().fromSystemProperties()
 				.build(JsonNode.class);
 		
 		assertThat(configuration, is(notNullValue()));

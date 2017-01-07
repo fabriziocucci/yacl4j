@@ -45,7 +45,7 @@ public class ConfigurationBuilderWithUserDefinedInterfaceTest {
 				, "  stringField: yacl4j is so simple");
 		
 		ApplicationConfiguration applicationConfiguration = ConfigurationBuilder.newBuilder()
-				.source().file(createConfigurationFile(configurationAsString, ".yaml"))
+				.source().fromFile(createConfigurationFile(configurationAsString, ".yaml"))
 				.build(ApplicationConfiguration.class);
 		
 		assertThat(applicationConfiguration, is(notNullValue()));

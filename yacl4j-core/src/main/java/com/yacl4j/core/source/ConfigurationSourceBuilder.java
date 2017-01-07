@@ -12,23 +12,23 @@ public class ConfigurationSourceBuilder {
 		this.configurationBuilder = configurationBuilder;
 	}
 
-	public ConfigurationBuilder file(File file) {
+	public ConfigurationBuilder fromFile(File file) {
 		return this.configurationBuilder.source(FileConfigurationSource.fromFile(file));
 	}
 	
-	public ConfigurationBuilder fileFromClasspath(String filename) {
+	public ConfigurationBuilder fromFileOnClasspath(String filename) {
 		return this.configurationBuilder.source(FileConfigurationSource.fromFileOnClasspath(filename));
 	}
 	
-	public ConfigurationBuilder fileFromPath(String filename) {
+	public ConfigurationBuilder fromFileOnPath(String filename) {
 		return this.configurationBuilder.source(FileConfigurationSource.fromFileOnPath(filename));
 	}
 	
-	public ConfigurationBuilder systemProperties() {
+	public ConfigurationBuilder fromSystemProperties() {
 		return this.configurationBuilder.source(new SystemPropertiesConfigurationSource());
 	}
 	
-	public ConfigurationBuilder environmentVariables() {
+	public ConfigurationBuilder fromEnvironmentVariables() {
 		return this.configurationBuilder.source(new EnvironmentVariablesConfigurationSource());
 	}
 	
