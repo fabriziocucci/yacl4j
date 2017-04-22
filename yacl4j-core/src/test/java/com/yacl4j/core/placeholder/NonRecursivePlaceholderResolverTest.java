@@ -91,7 +91,9 @@ public class NonRecursivePlaceholderResolverTest {
 		
 		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
 		
-		assertThat(applicationConfiguration.get("array").get(0).asText(), is(equalTo(applicationConfiguration.get("element0").asText())));
+		String actualValue = applicationConfiguration.get("array").get(0).asText();
+		String expectedValue = applicationConfiguration.get("element0").asText();
+		assertThat(actualValue, is(equalTo(expectedValue)));
 	}
 	
 	@Test
