@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 ## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.8.0...HEAD)
 ### Added
 - Added possibility to set a custom placeholder resolver.
+- Added possibility to set a custom value decoder.
 ### Fixed
 - Fixed wrong handling of null values during placeholder resolution.
 
