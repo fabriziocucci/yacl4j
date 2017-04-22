@@ -58,7 +58,9 @@ public class NonRecursivePlaceholderResolver implements PlaceholderResolver {
 	
 	private JsonNode resolveInValueNode(JsonNode root, JsonNode currentNode) {
 		List<JsonPointerPlaceholder> matches = findPlaceholders(currentNode);
-		if (matches.size() == 1 && matches.get(0).placeholder.equals(currentNode.textValue())) {
+		if (matches.isEmpty()) {
+			return currentNode;
+		} else if (matches.size() == 1 && matches.get(0).placeholder.equals(currentNode.textValue())) {
 			return resolveValueNodeByDereferencingJsonNode(root, currentNode, matches.get(0));
 		} else {
 			return resolveValueNodeByDereferencingValueNodes(root, currentNode, matches);

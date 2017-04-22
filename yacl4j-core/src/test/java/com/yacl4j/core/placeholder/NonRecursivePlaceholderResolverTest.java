@@ -9,6 +9,7 @@ import com.yacl4j.core.util.ConfigurationUtils;
 
 import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 import yacl4j.repackaged.com.fasterxml.jackson.databind.node.MissingNode;
+import yacl4j.repackaged.com.fasterxml.jackson.databind.node.NullNode;
 import yacl4j.repackaged.com.fasterxml.jackson.databind.node.TextNode;
 
 public class NonRecursivePlaceholderResolverTest {
@@ -30,6 +31,37 @@ public class NonRecursivePlaceholderResolverTest {
 	/////////////////////////
 	// ARRAY ELEMENT TESTS //
 	/////////////////////////
+	
+	@Test
+	public void testThatPlaceholderInArrayElementResolveToTheNullValueOfAnotherArrayElement() throws Exception {
+		
+		String configuration = String.join(System.getProperty("line.separator")
+				, "- null"
+				, "- ${0}");
+		
+		JsonNode applicationConfiguration = ConfigurationUtils.Yaml.fromString(configuration);
+		
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		
+		JsonNode actualValue = applicationConfiguration.get(1);
+		assertThat(actualValue, is(equalTo(NullNode.getInstance())));
+	}
+	
+	@Test
+	public void testThatPlaceholderInArrayElementResolveToTheNullValueOfAnObjectProperty() throws Exception {
+		
+		String configuration = String.join(System.getProperty("line.separator")
+				, "element0: null"
+				, "array:"
+				, "  - ${element0}");
+		
+		JsonNode applicationConfiguration = ConfigurationUtils.Yaml.fromString(configuration);
+		
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		
+		JsonNode actualValue = applicationConfiguration.get("array").get(0);
+		assertThat(actualValue, is(equalTo(NullNode.getInstance())));
+	}
 	
 	@Test
 	public void testThatPlaceholderInArrayElementResolveToTheValueOfAnotherArrayElement() throws Exception {
@@ -174,6 +206,37 @@ public class NonRecursivePlaceholderResolverTest {
 	///////////////////////////
 	// OBJECT PROPERTY TESTS //
 	///////////////////////////
+	
+	@Test
+	public void testThatPlaceholderInObjectPropertyResolveToTheNullValueOfAnotherObjectProperty() throws Exception {
+		
+		String configuration = String.join(System.getProperty("line.separator")
+				, "element0: null"
+				, "element1: ${element0}");
+		
+		JsonNode applicationConfiguration = ConfigurationUtils.Yaml.fromString(configuration);
+		
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		
+		JsonNode actualValue = applicationConfiguration.get("element1");
+		assertThat(actualValue, is(equalTo(NullNode.getInstance())));
+	}
+	
+	@Test
+	public void testThatPlaceholderInObjectPropertyResolveToTheNullValueOfAnArrayElement() throws Exception {
+		
+		String configuration = String.join(System.getProperty("line.separator")
+				, "array:"
+				, "  - null"
+				, "element1: ${array/0}");
+		
+		JsonNode applicationConfiguration = ConfigurationUtils.Yaml.fromString(configuration);
+		
+		nonRecursivePlaceholderResolver.resolvePlaceholders(applicationConfiguration);
+		
+		JsonNode actualValue = applicationConfiguration.get("element1");
+		assertThat(actualValue, is(equalTo(NullNode.getInstance())));
+	}
 	
 	@Test
 	public void testThatPlaceholderInObjectPropertyResolveToTheValueOfAnotherObjectProperty() throws Exception {
