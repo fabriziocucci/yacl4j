@@ -2,6 +2,7 @@ package com.yacl4j.core;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import com.yacl4j.core.placeholder.NonRecursivePlaceholderResolver;
@@ -16,10 +17,12 @@ public class ConfigurationBuilder {
 
 	private final List<ConfigurationSource> configurationSources;
 	private PlaceholderResolver placeholderResolver;
+	private Optional<ValueDecoder> valueDecoder;
 	
 	private ConfigurationBuilder() {
 		this.configurationSources = new LinkedList<>();
 		this.placeholderResolver = new NonRecursivePlaceholderResolver();
+		this.valueDecoder = Optional.empty();
 	}
 	
 	public static ConfigurationBuilder newBuilder() {
@@ -54,6 +57,7 @@ public class ConfigurationBuilder {
 	public <T> T build(Class<T> applicationConfigurationClass) {
 		JsonNode applicationConfiguration = mergeConfigurationSources();
 		this.placeholderResolver.resolvePlaceholders(applicationConfiguration);
+		this.valueDecoder.ifPresent(valueDecoder -> valueDecoder.decodeValues(applicationConfiguration));
 		return ConfigurationUtils.toValue(applicationConfiguration, applicationConfigurationClass);
 	}
 	
