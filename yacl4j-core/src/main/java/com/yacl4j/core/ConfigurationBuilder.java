@@ -54,11 +54,11 @@ public class ConfigurationBuilder {
 		return source(OptionalConfigurationSource.build(configurationSourceFactory));
 	}
 	
-	public <T> T build(Class<T> applicationConfigurationClass) {
-		JsonNode applicationConfiguration = mergeConfigurationSources();
-		this.placeholderResolver.resolvePlaceholders(applicationConfiguration);
-		this.valueDecoder.ifPresent(valueDecoder -> valueDecoder.decodeValues(applicationConfiguration));
-		return ConfigurationUtils.toValue(applicationConfiguration, applicationConfigurationClass);
+	public <T> T build(Class<T> configurationClass) {
+		JsonNode configuration = mergeConfigurationSources();
+		this.placeholderResolver.resolvePlaceholders(configuration);
+		this.valueDecoder.ifPresent(valueDecoder -> valueDecoder.decodeValues(configuration));
+		return ConfigurationUtils.toValue(configuration, configurationClass);
 	}
 	
 	private JsonNode mergeConfigurationSources() {
