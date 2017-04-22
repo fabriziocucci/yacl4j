@@ -43,8 +43,8 @@ public class ConfigurationBuilder {
 		return source(OptionalConfigurationSource.build(configurationSource));
 	}
 	
-	public ConfigurationBuilder optionalSource(Supplier<ConfigurationSource> configurationSourceFactoryO) {
-		return source(OptionalConfigurationSource.build(configurationSourceFactoryO));
+	public ConfigurationBuilder optionalSource(Supplier<ConfigurationSource> configurationSourceFactory) {
+		return source(OptionalConfigurationSource.build(configurationSourceFactory));
 	}
 	
 	public <T> T build(Class<T> applicationConfigurationClass) {
