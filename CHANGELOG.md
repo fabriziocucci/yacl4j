@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.8.0...HEAD)
+### Added
+- Added possibility to set a custom placeholder resolver.
 ### Fixed
 - Fixed wrong handling of null values during placeholder resolution.
 

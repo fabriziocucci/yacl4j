@@ -15,7 +15,7 @@ import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 public class ConfigurationBuilder {
 
 	private final List<ConfigurationSource> configurationSources;
-	private final PlaceholderResolver placeholderResolver;
+	private PlaceholderResolver placeholderResolver;
 	
 	private ConfigurationBuilder() {
 		this.configurationSources = new LinkedList<>();
@@ -24,6 +24,10 @@ public class ConfigurationBuilder {
 	
 	public static ConfigurationBuilder newBuilder() {
 		return new ConfigurationBuilder();
+	}
+	
+	public void placeholderResolver(PlaceholderResolver placeholderResolver) {
+		this.placeholderResolver = placeholderResolver;
 	}
 	
 	public ConfigurationSourceBuilder source() {
