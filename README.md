@@ -77,6 +77,22 @@ In the previous example:
 - at line 7, we are building the configuration bean based on the MyConfiguration interface;
 - if one property is defined in multiple sources, the source with higher priority win.
 
+## Default values? 42
+
+yacl4j is heavily based on Jackson (at this stage) and, unfortunately, Jackson does not support default values in interfaces...[yet](https://github.com/FasterXML/jackson-modules-base/issues/23). Disappointed? A bit. In trouble? No way. You just need to be a little bit more verbose:
+
+```java
+public class MyConfiguration {
+  
+  private String property = "42";
+  
+  public String getProperty() {
+    return property;
+  }
+  
+}
+```
+
 ## Placeholders support? ${Yes}
 yacl4j supports placeholders resolution with the syntax ${relaxed-json-pointer}.
 
