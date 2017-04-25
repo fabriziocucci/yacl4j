@@ -63,8 +63,8 @@ interface MyConfiguration {
 ```java
 MyConfiguration myConfiguration = ConfigurationBuilder.newBuilder() // #0
     .source().fromFile(new File("some-path/application.yaml"))      // #1
-    .source().fromFileFromClasspath("application.yaml")             // #2
-    .source().fromFileFromPath("/Users/yacl4j/application.yaml")    // #3
+    .source().fromFileOnClasspath("application.yaml")               // #2
+    .source().fromFileOnPath("/Users/yacl4j/application.yaml")      // #3
     .source().fromSystemProperties()                                // #4
     .source().fromEnvironmentVariables()                            // #5
     .source(new MyCustomConfigurationSource());                     // #6
