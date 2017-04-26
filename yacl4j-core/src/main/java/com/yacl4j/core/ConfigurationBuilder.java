@@ -29,8 +29,9 @@ public class ConfigurationBuilder {
 		return new ConfigurationBuilder();
 	}
 	
-	public void placeholderResolver(PlaceholderResolver placeholderResolver) {
+	public ConfigurationBuilder placeholderResolver(PlaceholderResolver placeholderResolver) {
 		this.placeholderResolver = placeholderResolver;
+		return this;
 	}
 	
 	public ConfigurationBuilder valueDecoder(ValueDecoder valueDecoder) {
