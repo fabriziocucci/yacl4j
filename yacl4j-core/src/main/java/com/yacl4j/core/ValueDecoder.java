@@ -4,6 +4,6 @@ import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 
 public interface ValueDecoder {
 
-	void decodeValues(JsonNode applicationConfiguration);
+	void decodeValues(JsonNode configuration);
 	
 }
