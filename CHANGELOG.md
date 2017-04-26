@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 ## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.0...HEAD)
 ### Fixed
 - Added missing setter for the `ValueDecoder` in the `ConfigurationBuilder`.
+- Fixed existing setter for the `PlaceholderResolver` in the `ConfigurationBuilder`.
 
 ## [yacl4j-0.9.0](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.8.0...yacl4j-0.9.0)
 ### Added
