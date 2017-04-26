@@ -1,12 +1,8 @@
 package com.yacl4j.core;
 
+import static com.yacl4j.test.TestUtils.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import org.junit.Test;
 
@@ -59,18 +55,6 @@ public class ConfigurationBuilderWithUserDefinedInterfaceTest {
 		assertThat(nestedApplicationConfiguration.getIntField(), is(equalTo(84)));
 		assertThat(nestedApplicationConfiguration.getBooleanField(), is(equalTo(false)));
 		assertThat(nestedApplicationConfiguration.getStringField(), is(equalTo("yacl4j is so simple")));
-	}
-	
-	///////////
-	// UTILS //
-	///////////
-	
-	private static File createConfigurationFile(String configuration, String fileExtension) throws IOException {
-		File configurationFile = File.createTempFile("application", fileExtension);
-		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(configurationFile))) {
-			bufferedWriter.write(configuration);
-			return configurationFile;
-		}
 	}
 	
 }

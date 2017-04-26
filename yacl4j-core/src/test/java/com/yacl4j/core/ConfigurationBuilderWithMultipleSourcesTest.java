@@ -1,12 +1,9 @@
 package com.yacl4j.core;
 
+import static com.yacl4j.test.TestUtils.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Properties;
 
 import org.junit.Test;
@@ -84,18 +81,6 @@ public class ConfigurationBuilderWithMultipleSourcesTest {
 		assertThat(configurationWithYamlFileAndSystemProperties.at("/nested/property1").asText(), is(equalTo("nested.value1")));
 		assertThat(configurationWithYamlFileAndSystemProperties.at("/property2").asText(), is(equalTo("value2")));
 		assertThat(configurationWithYamlFileAndSystemProperties.at("/nested/property2").asText(), is(equalTo("nested.value2")));
-	}
-	
-	///////////
-	// UTILS //
-	///////////
-	
-	private static File createConfigurationFile(String configuration, String fileExtension) throws IOException {
-		File configurationFile = File.createTempFile("application", fileExtension);
-		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(configurationFile))) {
-			bufferedWriter.write(configuration);
-			return configurationFile;
-		}
 	}
 	
 }
