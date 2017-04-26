@@ -21,6 +21,22 @@ import yacl4j.repackaged.com.fasterxml.jackson.databind.JsonNode;
 public class ConfigurationBuilderWithPlaceholderResolutionTest {
 
 	@Test
+	public void testConfigurationBuilderWithNoOpPlaceholderResolver() throws IOException {
+		
+		String configurationAsString = String.join(System.getProperty("line.separator")
+				, "greeting: hello ${name}"
+				, "name: world");
+		
+		JsonNode configuration = ConfigurationBuilder.newBuilder()
+				.source().fromFile(createConfigurationFile(configurationAsString, ".yaml"))
+				.placeholderResolver(config -> { })
+				.build(JsonNode.class);
+		
+		assertThat(configuration, is(notNullValue()));
+		assertThat(configuration.at("/greeting").asText(), is(equalTo("hello ${name}")));
+	}
+	
+	@Test
 	public void testConfigurationBuilderWithSinglePlaceholderResolvedFromTheSameSource() throws IOException {
 		
 		String configurationAsString = String.join(System.getProperty("line.separator")
