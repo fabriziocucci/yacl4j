@@ -33,6 +33,11 @@ public class ConfigurationBuilder {
 		this.placeholderResolver = placeholderResolver;
 	}
 	
+	public ConfigurationBuilder valueDecoder(ValueDecoder valueDecoder) {
+		this.valueDecoder = Optional.of(valueDecoder);
+		return this;
+	}
+	
 	public ConfigurationSourceBuilder source() {
 		return new ConfigurationSourceBuilder(this);
 	}
