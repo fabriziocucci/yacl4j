@@ -6,7 +6,7 @@
 		<version>0.9.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>yacl4j-repackaged-jackson</artifactId>
+	<artifactId>yacl4j-core-dependencies</artifactId>
 
 	<properties>
 		<jackson.version>2.5.4</jackson.version>

@@ -15,6 +15,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.github.fabriziocucci</groupId>
+			<artifactId>yacl4j-core-dependencies</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
@@ -25,11 +30,6 @@
 			<artifactId>jmockit</artifactId>
 			<version>${jmockit.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.github.fabriziocucci</groupId>
-			<artifactId>yacl4j-repackaged-jackson</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

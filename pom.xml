@@ -12,8 +12,8 @@
 
 	<modules>
 		<module>yacl4j-core</module>
+		<module>yacl4j-core-dependencies</module>
 		<module>yacl4j-http</module>
-		<module>yacl4j-repackaged-jackson</module>
 	</modules>
 
 	<licenses>
