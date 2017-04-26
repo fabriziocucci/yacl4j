@@ -286,17 +286,17 @@ You just need to:
 
 ```java
 public class MyConfigurationSource implements ConfigurationSource {
-		
-		@Override
-		public JsonNode getConfiguration() {
-			if (isSourceAvailable()) {
-				// ...
-			} else {
-				throw new ConfigurationSourceNotAvailableException();
-			}
-		}
-		
-	}
+
+  @Override
+  public JsonNode getConfiguration() {
+    if (isSourceAvailable()) {
+      // ...
+    } else {
+      throw new ConfigurationSourceNotAvailableException();
+    }
+  }
+  
+}
 ```
 
 2. use the `optionalSource` method on the `ConfigurationBuilder` which accepts a `ConfigurationSource` as parameter, e.g.
@@ -313,16 +313,16 @@ If, for some reason, you configuration source eagerly checks the availability of
 
 ```java
 public class MyConfigurationSource implements ConfigurationSource {
+
+  public MyConfigurationSource() {
+    if (isSourceAvailable()) {
+      // ...
+    } else {
+      throw new ConfigurationSourceNotAvailableException();
+    }
+  }
 		
-		public MyConfigurationSource() {
-			if (isSourceAvailable()) {
-				// ...
-			} else {
-				throw new ConfigurationSourceNotAvailableException();
-			}
-		}
-		
-	}
+}
 ```
 
 2. use the `optionalSource` method on the `ConfigurationBuilder` which accepts a `Supplier<ConfigurationSource>` as parameter, e.g. 
