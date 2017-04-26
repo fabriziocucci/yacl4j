@@ -6,8 +6,8 @@ updateReadme() {
 	
 	NEW_README_FILE=README.md.new
 	OLD_README_FILE=README.md
-	MAVEN_VERSION_REGEXP="(.*<version>)(0.8.0)(</version>)"
-	GRADLE_VERSION_REGEXP="(.*compile group: \"com.github.fabriziocucci\", name:\"yacl4j-core\", version: \")(0.8.0)(\")"
+	MAVEN_VERSION_REGEXP="(.*<version>)(.*)(</version>)"
+	GRADLE_VERSION_REGEXP="(.*compile group: \"com.github.fabriziocucci\", name:\"yacl4j-core\", version: \")(.*)(\")"
 
 	while IFS='' read -r line || [[ -n "$line" ]]; do
 		if [[ $line =~ $MAVEN_VERSION_REGEXP ]]; then
@@ -66,9 +66,9 @@ fi
 
 releaseVersion=$1
 
-updateReadme $releaseVersion										&& \
-updateChangelog $releaseVersion										&& \
-git add README.md CHANGELOG.md										&& \
-git commit -m "Updated README.md and CHANGELOG.md before release"	&& \
-git push															&& \
+updateReadme $releaseVersion                                        && \
+updateChangelog $releaseVersion                                     && \
+git add README.md CHANGELOG.md                                      && \
+git commit -m "Updated README.md and CHANGELOG.md before release"   && \
+git push                                                            && \
 ./mvnw --batch-mode release:clean release:prepare release:perform -DreleaseVersion=${releaseVersion} -P release
