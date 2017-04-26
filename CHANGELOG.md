@@ -1,7 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.0...HEAD)
+## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.1...HEAD)
+
+## [yacl4j-0.9.1](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.0...yacl4j-0.9.1)
 ### Fixed
 - Added missing setter for the `ValueDecoder` in the `ConfigurationBuilder`.
 - Fixed existing setter for the `PlaceholderResolver` in the `ConfigurationBuilder`.
