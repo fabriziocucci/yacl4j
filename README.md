@@ -5,11 +5,6 @@
 # yacl4j
 **yacl4j** is a configuration library for Java highly inspired by [cfg4j](https://github.com/cfg4j/cfg4j) and [Spring Boot](https://github.com/spring-projects/spring-boot).
 
-## Only the brave...
-yacl4j is still very **experimental**. If you need something mature I strongly encourage you to check:
-- [cfg4j](https://github.com/cfg4j/cfg4j)
-- [OWNER](https://github.com/lviggiano/owner)
-
 ## Overview
 yacl4j:
 - is open source;
