@@ -3,19 +3,19 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.1...HEAD)
 
-## [yacl4j-0.9.1](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.0...yacl4j-0.9.1)
+## [0.9.1](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.0...yacl4j-0.9.1)
 ### Fixed
 - Added missing setter for the `ValueDecoder` in the `ConfigurationBuilder`.
 - Fixed existing setter for the `PlaceholderResolver` in the `ConfigurationBuilder`.
 
-## [yacl4j-0.9.0](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.8.0...yacl4j-0.9.0)
+## [0.9.0](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.8.0...yacl4j-0.9.0)
 ### Added
 - Added possibility to set a custom placeholder resolver.
 - Added possibility to set a custom value decoder.
 ### Fixed
 - Fixed wrong handling of null values during placeholder resolution.
 
-## [yacl4j-0.8.0](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.7.0...yacl4j-0.8.0)
+## [0.8.0](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.7.0...yacl4j-0.8.0)
 ### Added
 - Added optional configuration sources. [\#3](https://github.com/fabriziocucci/yacl4j/issues/3)
 ### Changed
