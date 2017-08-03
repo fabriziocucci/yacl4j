@@ -20,9 +20,11 @@ public class ConfigurationUtils {
 
 	private ConfigurationUtils() { }
 	
-	private static final ObjectMapper DEFAULT_OBJECT_MAPPER = Yaml.YAML_OBJECT_MAPPER;
+	private static ObjectMapper defaultObjectMapper() {
+		return Yaml.YAML_OBJECT_MAPPER;
+	}
 	
-	private static ObjectMapper objectMapper(JsonFactory jsonFactory) {
+	private static ObjectMapper buildObjectMapper(JsonFactory jsonFactory) {
 		return new ObjectMapper(jsonFactory)
 				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 				.registerModule(new MrBeanModule())
@@ -30,12 +32,12 @@ public class ConfigurationUtils {
 	}
 	
 	public static JsonNode emptyConfiguration() {
-		return DEFAULT_OBJECT_MAPPER.createObjectNode();
+		return defaultObjectMapper().createObjectNode();
 	}
 	
 	public static JsonNode fromString(String configuration) {
 		try {
-			return DEFAULT_OBJECT_MAPPER.readValue(configuration, JsonNode.class);
+			return defaultObjectMapper().readValue(configuration, JsonNode.class);
 		} catch (Exception exception) {
 			return TextNode.valueOf(configuration);
 		}
@@ -43,7 +45,7 @@ public class ConfigurationUtils {
 	
 	public static <T> T toValue(JsonNode configuration, Class<T> configurationClass) {
 		try {
-			return DEFAULT_OBJECT_MAPPER.treeToValue(configuration, configurationClass);
+			return defaultObjectMapper().treeToValue(configuration, configurationClass);
 		} catch (Exception exception) {
 			throw new IllegalStateException(exception);
 		}
@@ -70,7 +72,7 @@ public class ConfigurationUtils {
 		
 		private Yaml() { }
 		
-		private static final ObjectMapper YAML_OBJECT_MAPPER = objectMapper(new YAMLFactory());
+		private static final ObjectMapper YAML_OBJECT_MAPPER = buildObjectMapper(new YAMLFactory());
 		
 		public static JsonNode fromInputStream(InputStream configuration) {
 			try {
@@ -98,7 +100,7 @@ public class ConfigurationUtils {
 		
 		private Json() { }
 		
-		private static final ObjectMapper JSON_OBJECT_MAPPER = objectMapper(null);
+		private static final ObjectMapper JSON_OBJECT_MAPPER = buildObjectMapper(null);
 		
 		public static JsonNode fromInputStream(InputStream configuration) {
 			try {
