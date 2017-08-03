@@ -3,7 +3,7 @@
 
 	<groupId>com.github.fabriziocucci</groupId>
 	<artifactId>yacl4j</artifactId>
-	<version>0.9.2</version>
+	<version>0.9.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>yacl4j</name>
@@ -34,7 +34,7 @@
 		<connection>scm:git:https://github.com/fabriziocucci/yacl4j.git</connection>
 		<developerConnection>scm:git:git@github.com:fabriziocucci/yacl4j.git</developerConnection>
 		<url>https://github.com/fabriziocucci/yacl4j/tree/master</url>
-		<tag>yacl4j-0.9.2</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
