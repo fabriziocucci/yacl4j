@@ -46,7 +46,7 @@ updateChangelog() {
 			unreleasedSuffix=${BASH_REMATCH[3]}
 			echo "$unreleasedPrefix$releaseVersion$unreleasedSuffix" >> $NEW_CHANGELOG_FILE
 			echo "" >> $NEW_CHANGELOG_FILE
-			echo "## [yacl4j-$releaseVersion](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-$previousVersion...yacl4j-$releaseVersion)" >> $NEW_CHANGELOG_FILE
+			echo "## [$releaseVersion](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-$previousVersion...yacl4j-$releaseVersion)" >> $NEW_CHANGELOG_FILE
 		else
 			echo "$line" >> $NEW_CHANGELOG_FILE
 		fi
