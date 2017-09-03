@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [Unreleased](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.2...HEAD)
 
-## [yacl4j-0.9.2](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.1...yacl4j-0.9.2)
+## [0.9.2](https://github.com/fabriziocucci/yacl4j/compare/yacl4j-0.9.1...yacl4j-0.9.2)
 ### Fixed
 - Absurd `NullPointerException at com.yacl4j.core.util.ConfigurationUtils.emptyConfiguration(ConfigurationUtils.java:33)` with IBM SDK 8 (see [commit](https://github.com/fabriziocucci/yacl4j/commit/0b67d4f400cc8d76c4ed5b1d30164ef290ad627e) message for more details).
 
